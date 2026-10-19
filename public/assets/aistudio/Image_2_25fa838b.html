@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"on-tertiary":"#ffffff","surface":"#fbf9f5","surface-dim":"#dbdad6","secondary-fixed-dim":"#d4c4b2","surface-container-lowest":"#ffffff","secondary-fixed":"#f1e0cd","on-secondary":"#ffffff","on-error-container":"#93000a","on-tertiary-fixed-variant":"#494645","on-tertiary-container":"#fffbff","surface-tint":"#a0401c","primary-fixed-dim":"#ffb59c","on-primary-fixed-variant":"#802a05","secondary-container":"#f1e0cd","outline":"#8a726a","inverse-primary":"#ffb59c","inverse-on-surface":"#f2f0ed","on-background":"#1b1c1a","surface-bright":"#fbf9f5","inverse-surface":"#30312e","surface-container-low":"#f5f3ef","on-error":"#ffffff","surface-container-high":"#eae8e4","background":"#fbf9f5","on-primary-fixed":"#390c00","tertiary-container":"#777472","tertiary-fixed-dim":"#cac5c4","surface-container-highest":"#e4e2de","on-surface-variant":"#56423c","on-secondary-fixed-variant":"#504538","primary-container":"#bd5630","on-surface":"#1b1c1a","primary-fixed":"#ffdbcf","surface-container":"#efeeea","on-primary":"#ffffff","on-secondary-container":"#6f6254","secondary":"#695c4e","on-secondary-fixed":"#231a0f","on-primary-container":"#fffbff","error-container":"#ffdad6","surface-variant":"#e4e2de","on-tertiary-fixed":"#1d1b1a","outline-variant":"#ddc0b7","error":"#ba1a1a","tertiary":"#5e5b5a","tertiary-fixed":"#e7e1df","primary":"#9d3e1a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","space-xl":"2.5rem","margin":"2rem","space-md":"1rem","space-lg":"1.5rem","space-xs":"0.25rem","gutter":"1.5rem"},"fontFamily":{"body-md":["Inter"],"display-lg-mobile":["Playfair Display"],"headline-xl":["Plus Jakarta Sans"],"tabular-data":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-md":["Inter"],"display-lg":["Playfair Display"],"body-sm":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-xl-mobile":["Plus Jakarta Sans"]},"fontSize":{"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"tabular-data":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-xl-mobile":["26px",{"lineHeight":"32px","fontWeight":"600"}]}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg"><div class="px-space-md mb-space-md flex items-center gap-space-sm"><img alt="EventSphere AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiQqcR43qJwkTAQ0_TKS6KvaixLlODA03GRwCCSQXFUHeFzXLtk3OfT8rzsPLS255kkd8UCjjQND4XViJCFWolij8d9LTsFS5slH-D3ZqRSxi46U_7p14qE4P5_AELflWBXOCOll4HxG3j0t_zh5Gjihj852dbCTXoY0GMtxohzNSqE64UvCc0VM1Uy2k4q6fQOQcnE_lZIEWDKoCu1Z318X1Bx0HXpOrdYzqRMRPuUTMZSBeyizcxFA"/><span class="font-headline-sm text-on-surface">EventSphere</span></div><div class="px-space-md mb-space-md"><div class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between cursor-pointer"><span class="text-body-sm font-medium">Global Gala 2024</span><span class="material-symbols-outlined text-sm">unfold_more</span></div></div><nav class="flex-1 px-space-sm space-y-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-medium"><a aria-current="page" class="flex items-center px-space-md py-space-sm rounded-lg transition-all bg-primary-container text-on-primary-container font-medium" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-space-sm">dashboard</span>Dashboard</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="schedule" href="#"><span class="material-symbols-outlined mr-space-sm">calendar_month</span>Schedule</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="attendees" href="#"><span class="material-symbols-outlined mr-space-sm">group</span>Attendees</a></nav></aside><div class="pl-64 pr-80"><header class="fixed top-0 left-64 right-80 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><span class="font-headline-md text-on-surface">Workspace</span></div><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-surface p-space-lg"><div class="flex flex-col w-full text-on-surface font-body-md">
+<!-- Top Workspace Action Bar & Tabs -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<span class="text-label-md uppercase tracking-wider text-primary font-bold">Global Gala 2024</span>
+<h1 class="font-display-lg text-on-surface mt-space-xs">Production Dashboard & AI Control</h1>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-low p-1.5 rounded-xl shadow-sm">
+<button class="tab-btn px-space-md py-space-sm rounded-lg text-body-sm font-medium transition-all bg-surface text-on-surface shadow-xs" data-target="overview" onclick="switchTab('overview')">Overview & Vision</button>
+<button class="tab-btn px-space-md py-space-sm rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface" data-target="budget" onclick="switchTab('budget')">Smart Budget</button>
+<button class="tab-btn px-space-md py-space-sm rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface" data-target="timeline" onclick="switchTab('timeline')">Timeline</button>
+<button class="tab-btn px-space-md py-space-sm rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface" data-target="vendors" onclick="switchTab('vendors')">Vendors</button>
+<button class="tab-btn px-space-md py-space-sm rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface" data-target="moodboard" onclick="switchTab('moodboard')">AI Moodboard</button>
+</div>
+</div>
+<!-- TAB CONTENT: OVERVIEW & VISION -->
+<div class="tab-content flex flex-col gap-space-lg" id="tab-overview">
+<!-- Hero Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="md:col-span-2 bg-surface-container-low rounded-xl p-space-lg relative overflow-hidden shadow-sm flex flex-col justify-between min-h-[340px]">
+<div class="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none" data-alt="Warm editorial luxury interior gala ballroom with golden hour lighting, terracotta accents, exquisite floral arrangements, and high-end modern table settings in a 50-word cinematic description." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOi3jo37tWvP4NQbnIowB-8yFk3prTqqGU1_Js1NYgDmAxSvZbT3Av3X7lxaXaYtPnU2ySdr1NtjpknB4bEKFoHPBP9QZaXW_oWBlhWbAu10avsmVwlhrHU05uQJMqcfruV3CaDYV97-1FuWxG1h0dt7yTkdZp9nKCsGRn70fOo8sO7Y-Z4ZXzeZVdfzOujXl7X6884QHWNL3w6MglmmeDbL-d24iaZMD6KNWJCQidMnypRCQY5uk1zQ')"></div>
+<div class="relative z-10 flex justify-between items-start">
+<span class="px-space-md py-1 bg-primary text-on-primary rounded-full text-label-md font-bold uppercase tracking-wider">Active Concept</span>
+<span class="text-tabular-data text-on-surface-variant">T-Minus 45 Days</span>
+</div>
+<div class="relative z-10 mt-space-xl">
+<h2 class="font-display-lg text-on-surface mb-space-sm">Elysian Renaissance</h2>
+<p class="text-body-lg text-on-surface-variant max-w-xl">Harmonizing organic linen textures with high-contrast terracotta and warm amber uplighting. Designed for 450 global VIP delegates.</p>
+</div>
+<div class="relative z-10 flex items-center gap-space-md pt-space-md">
+<button class="px-space-md py-space-sm bg-primary text-on-primary rounded-lg font-medium shadow-sm hover:bg-primary/90 transition-all flex items-center gap-space-sm" onclick="switchTab('moodboard')">
+<span class="material-symbols-outlined text-[18px]">palette</span> Explore Moodboard
+          </button>
+<button class="px-space-md py-space-sm bg-surface-container-high text-on-surface rounded-lg font-medium hover:bg-surface-container-highest transition-all" onclick="openCopilotPrompt('Analyze current theme readiness')">AI Theme Critique</button>
+</div>
+</div>
+<!-- Quick Metrics Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-sm text-on-surface">Live Health Score</span>
+<span class="material-symbols-outlined text-primary">monitoring</span>
+</div>
+<div class="flex items-baseline gap-space-sm my-auto">
+<span class="font-display-lg text-primary">94</span>
+<span class="text-body-sm text-on-surface-variant">/ 100 Optimal</span>
+</div>
+<div class="space-y-space-sm mt-space-md">
+<div>
+<div class="flex justify-between text-label-md text-on-surface-variant mb-1">
+<span>Budget Efficiency</span>
+<span>98%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md text-on-surface-variant mb-1">
+<span>RSVP Confirmation</span>
+<span>88%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Bento Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-sm text-on-surface">Venue Status</span>
+<span class="material-symbols-outlined text-on-surface-variant">location_on</span>
+</div>
+<div class="w-full h-40 bg-cover bg-center rounded-lg mb-space-md shadow-inner" data-location="Grand Palais, Paris" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBX3nB_9386yYNw5d_3UvPDEevMONPHFEinHGcscgd1xb6Frbhvw_1s16sRVguj2D0Qvcb1aeonE8gZJ3cM14FR3mbLgqw2bna4tXCTGw3QvYuiONNlUyPWn0hGdLbx_cU9D4P4fWG1MiK1tNuD8lhOXa1Dc7XEjHpBWN6uj2V9I_cDMcMXfcajPCkNsgwtHydczkLcAa8pLzyE5r4t7YZuDVrHt2ymeIAuErtd3pOqfcY0GJnK9S--CA')"></div>
+<p class="font-medium text-on-surface">Grand Palais Éphémère</p>
+<p class="text-body-sm text-on-surface-variant">Contract signed. Rigging schedule locked for Oct 12.</p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-sm text-on-surface">AI Risk Radar</span>
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div class="space-y-space-md">
+<div class="p-space-md bg-surface rounded-lg">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="w-2 h-2 rounded-full bg-amber-600"></span>
+<span class="font-medium text-body-sm">Catering Staff Shortage Risk</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Recommend confirming backup agency by Tuesday.</p>
+</div>
+<div class="p-space-md bg-surface rounded-lg">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="w-2 h-2 rounded-full bg-green-600"></span>
+<span class="font-medium text-body-sm">Audio/Visual Specs Approved</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">All Dolby Atmos channel mappings verified.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-sm text-on-surface">VIP Keynote Speakers</span>
+<span class="material-symbols-outlined text-on-surface-variant">group</span>
+</div>
+<div class="space-y-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of keynote speaker in professional attire with warm studio lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfvoI_ptQ9lg_-mEN5pRRGWKWyzelAufT0_wzPfJh_jdMwejiKyuNcTXTUCsvpCuQeTqSTku8J-9XUaPU-WNOC87KD_jQmLIfRNRKyJU51PFdtCsCO_mj6JECYhdUKMnVuUYd3BoT2j3I7zLomcnGnP3EBVE2lkcNMmIuABXnPFxzLEy5y3qm0urixG_sMUdIQ6E6xSFnu5YKwKEvbc_PidtTetRHrJIzOpa2A40LzgZc_iFIxQs-WTQ')"></div>
+<div>
+<p class="font-medium text-body-sm">Elena Rostova</p>
+<p class="text-body-sm text-on-surface-variant">Futurism & AI Ethics</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of second speaker smiling warmly in architectural studio setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAXWbu5OvnTnXAdP4rfsSLM-6zg4Aw0Nfpu_L81lcNI87dOHG6skz1cPC4fPznEEa0LIeRLObquitFn5GjuUvwgIuB0HouJCo8WzlH5vRXm_pIEXVzwyZWbZPywd-Ecj83ljedjOVaJ0gDiD_qI0Zm4_cUbMgHfescTKS1wQ2c2PQ1A8Ap1-DicT_s4gVfIuED7qDL6o8InJGDuIHsxe89y_Bqq0lg22HR2x9K28ACFmEgZnSJrYA7ONw')"></div>
+<div>
+<p class="font-medium text-body-sm">Marcus Vance</p>
+<p class="text-body-sm text-on-surface-variant">Sustainable Architecture</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-space-md py-2 bg-surface text-on-surface font-medium text-body-sm rounded-lg hover:bg-surface-container-high transition-all" onclick="openCopilotPrompt('Draft invite follow-up for keynote speakers')">Coordinate via AI Whisperer</button>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT: SMART BUDGET & EXPENSE SIMULATOR -->
+<div class="tab-content hidden flex flex-col gap-space-lg" id="tab-budget">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg">
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Total Allocated</span>
+<h3 class="font-headline-xl text-on-surface mt-space-xs">$450,000</h3>
+<p class="text-body-sm text-primary mt-1">100% Budget Utilization</p>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Committed Spend</span>
+<h3 class="font-headline-xl text-on-surface mt-space-xs">$384,500</h3>
+<p class="text-body-sm text-on-surface-variant mt-1">85.4% Contracted</p>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">AI Projected Savings</span>
+<h3 class="font-headline-xl text-primary mt-space-xs">+$24,300</h3>
+<p class="text-body-sm text-on-surface-variant mt-1">Via Smart Vendor Bidding</p>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Contingency Fund</span>
+<h3 class="font-headline-xl text-on-surface mt-space-xs">$41,200</h3>
+<p class="text-body-sm text-on-surface-variant mt-1">Secure Reserve</p>
+</div>
+</div>
+<!-- Simulator & Breakdown -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="md:col-span-2 bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-space-lg">
+<h3 class="font-headline-md text-on-surface">Interactive Expense Simulator</h3>
+<span class="text-body-sm text-on-surface-variant">Adjust guest count & tier to simulate variance</span>
+</div>
+<div class="space-y-space-lg">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-body-md">Guest Capacity</span>
+<span class="font-tabular-data text-primary font-bold" id="guest-count-val">450 Attendees</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="800" min="200" oninput="updateBudgetSimulation(this.value)" type="range" value="450"/>
+</div>
+<div class="grid grid-cols-2 gap-space-md pt-space-md">
+<div class="p-space-md bg-surface rounded-xl">
+<p class="text-label-md text-on-surface-variant">Simulated Catering</p>
+<p class="font-headline-lg text-on-surface mt-1" id="sim-catering">$135,000</p>
+</div>
+<div class="p-space-md bg-surface rounded-xl">
+<p class="text-label-md text-on-surface-variant">Simulated Production</p>
+<p class="font-headline-lg text-on-surface mt-1" id="sim-production">$112,500</p>
+</div>
+</div>
+<div class="p-space-md bg-primary-fixed/30 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary text-[24px]">lightbulb</span>
+<div>
+<p class="font-medium text-body-md text-on-primary-fixed">AI Optimization Recommendation</p>
+<p class="text-body-sm text-on-secondary-fixed-variant">Shifting catering schedule by 2 hours saves approx $4,500 in overtime labor.</p>
+</div>
+</div>
+<button class="px-space-md py-2 bg-primary text-on-primary rounded-lg text-body-sm font-medium" onclick="openCopilotPrompt('Apply budget optimization for catering overtime')">Apply</button>
+</div>
+</div>
+</div>
+<!-- Expense Categories List -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-on-surface mb-space-md">Category Breakdown</h3>
+<div class="space-y-space-md">
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span>Catering & Beverage</span>
+<span class="font-tabular-data">$120,000</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full"><div class="bg-primary h-full rounded-full" style="width: 35%"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span>Venue & Permits</span>
+<span class="font-tabular-data">$95,000</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full"><div class="bg-secondary h-full rounded-full" style="width: 25%"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span>AV & Lighting</span>
+<span class="font-tabular-data">$85,000</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full"><div class="bg-tertiary h-full rounded-full" style="width: 20%"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span>Design & Decor</span>
+<span class="font-tabular-data">$60,000</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full"><div class="bg-primary-fixed-dim h-full rounded-full" style="width: 12%"></div></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-space-lg py-2 bg-surface text-on-surface rounded-lg font-medium text-body-sm hover:bg-surface-container-high transition-all" onclick="openCopilotPrompt('Generate full financial audit report')">Export AI Financial Audit</button>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT: INTERACTIVE TIMELINE -->
+<div class="tab-content hidden flex flex-col gap-space-lg" id="tab-timeline">
+<div class="flex items-center justify-between bg-surface-container-low p-space-md rounded-xl shadow-sm">
+<div class="flex items-center gap-space-md">
+<span class="font-headline-sm text-on-surface">Dual-Mode Timeline</span>
+<div class="flex bg-surface p-1 rounded-lg">
+<button class="px-space-md py-1 rounded-md text-body-sm font-medium bg-primary text-on-primary transition-all" id="mode-gantt" onclick="setTimelineMode('gantt')">Gantt View</button>
+<button class="px-space-md py-1 rounded-md text-body-sm font-medium text-on-surface-variant transition-all" id="mode-ros" onclick="setTimelineMode('run-of-show')">Run of Show</button>
+</div>
+</div>
+<button class="px-space-md py-2 bg-primary text-on-primary rounded-lg text-body-sm font-medium flex items-center gap-space-sm" onclick="openCopilotPrompt('Optimize schedule for keynote transitions')">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span> AI Schedule Polish
+      </button>
+</div>
+<!-- Timeline Container -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<!-- Gantt view items -->
+<div class="space-y-space-md" id="timeline-gantt-view">
+<div class="p-space-md bg-surface rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary">event_seat</span>
+<div>
+<p class="font-medium text-body-md">Load-In & Rigging Setup</p>
+<p class="text-body-sm text-on-surface-variant">Grand Palais Main Hall · 06:00 - 12:00</p>
+</div>
+</div>
+<span class="px-space-md py-1 bg-green-100 text-green-800 rounded-full text-label-md font-medium">Completed</span>
+</div>
+<div class="p-space-md bg-surface rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary">mic</span>
+<div>
+<p class="font-medium text-body-md">VIP Speaker Sound Check</p>
+<p class="text-body-sm text-on-surface-variant">Stage A · 13:00 - 14:30</p>
+</div>
+</div>
+<span class="px-space-md py-1 bg-amber-100 text-amber-800 rounded-full text-label-md font-medium">In Progress</span>
+</div>
+<div class="p-space-md bg-surface rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-on-surface-variant">local_bar</span>
+<div>
+<p class="font-medium text-body-md">Cocktail Reception & Grand Reveal</p>
+<p class="text-body-sm text-on-surface-variant">Atrium & Gardens · 18:00 - 20:00</p>
+</div>
+</div>
+<span class="px-space-md py-1 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-medium">Upcoming</span>
+</div>
+</div>
+<!-- Run of Show view (hidden by default) -->
+<div class="space-y-space-md hidden" id="timeline-ros-view">
+<div class="border-l-2 border-primary pl-space-md space-y-space-lg">
+<div>
+<span class="text-tabular-data text-primary font-bold">17:45 [015m]</span>
+<h4 class="font-headline-sm text-on-surface mt-1">Doors Open & Ambient Soundscape Cue #4</h4>
+<p class="text-body-sm text-on-surface-variant">Front of house team ready at entrances. Ushers deployed.</p>
+</div>
+<div>
+<span class="text-tabular-data text-primary font-bold">18:30 [030m]</span>
+<h4 class="font-headline-sm text-on-surface mt-1">Welcome Address by CEO</h4>
+<p class="text-body-sm text-on-surface-variant">Main Stage. Spotlight focus on center podium. Live teleprompter active.</p>
+</div>
+<div>
+<span class="text-tabular-data text-primary font-bold">19:00 [060m]</span>
+<h4 class="font-headline-sm text-on-surface mt-1">Gourmet Dinner Service</h4>
+<p class="text-body-sm text-on-surface-variant">Synchronized table service across 45 seated sectors.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT: VENDOR CHECKLIST & CONTRACT MATRIX -->
+<div class="tab-content hidden flex flex-col gap-space-lg" id="tab-vendors">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm flex items-center justify-between">
+<div>
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Active Vendors</span>
+<h3 class="font-headline-xl text-on-surface mt-space-xs">14 / 15</h3>
+</div>
+<span class="material-symbols-outlined text-primary text-[32px]">handshake</span>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm flex items-center justify-between">
+<div>
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Contracts Signed</span>
+<h3 class="font-headline-xl text-on-surface mt-space-xs">12 Verified</h3>
+</div>
+<span class="material-symbols-outlined text-green-700 text-[32px]">verified</span>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm flex items-center justify-between">
+<div>
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Pending Approvals</span>
+<h3 class="font-headline-xl text-primary mt-space-xs">2 Reviewing</h3>
+</div>
+<span class="material-symbols-outlined text-amber-600 text-[32px]">pending_actions</span>
+</div>
+</div>
+<!-- Vendor Matrix Table -->
+<div class="bg-surface-container-low rounded-xl shadow-sm overflow-hidden">
+<div class="p-space-lg flex items-center justify-between border-b border-surface-container">
+<h3 class="font-headline-md text-on-surface">Vendor Contract Matrix</h3>
+<button class="px-space-md py-2 bg-surface text-on-surface rounded-lg text-body-sm font-medium hover:bg-surface-container-high transition-all" onclick="openCopilotPrompt('Draft reminder for pending vendor contracts')">AI Contract Follow-up</button>
+</div>
+<div class="divide-y divide-surface-container">
+<div class="p-space-md flex items-center justify-between hover:bg-surface transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary">AV</div>
+<div>
+<p class="font-medium text-body-md">Lumina Sound & Visuals</p>
+<p class="text-body-sm text-on-surface-variant">Lighting, Rigging, Dolby Atmos</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xl">
+<span class="font-tabular-data">$85,000</span>
+<span class="px-space-md py-1 bg-green-100 text-green-800 rounded-full text-label-md font-medium">Contract Executed</span>
+</div>
+</div>
+<div class="p-space-md flex items-center justify-between hover:bg-surface transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-secondary">GC</div>
+<div>
+<p class="font-medium text-body-md">Gastronomie de Luxe</p>
+<p class="text-body-sm text-on-surface-variant">Catering & Sommelier Service</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xl">
+<span class="font-tabular-data">$120,000</span>
+<span class="px-space-md py-1 bg-green-100 text-green-800 rounded-full text-label-md font-medium">Contract Executed</span>
+</div>
+</div>
+<div class="p-space-md flex items-center justify-between hover:bg-surface transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center font-bold text-tertiary"> floral </div>
+<div>
+<p class="font-medium text-body-md">Botanica Studio</p>
+<p class="text-body-sm text-on-surface-variant">Floral Architecture & Installations</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xl">
+<span class="font-tabular-data">$35,000</span>
+<span class="px-space-md py-1 bg-amber-100 text-amber-800 rounded-full text-label-md font-medium">Pending Review</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT: AI MOODBOARD & PERSONALIZED IDEA LAB -->
+<div class="tab-content hidden flex flex-col gap-space-lg" id="tab-moodboard">
+<div class="flex items-center justify-between bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<div>
+<h3 class="font-headline-md text-on-surface">Generative AI Moodboard & Concept Lab</h3>
+<p class="text-body-sm text-on-surface-variant">Curate color swatches, lighting prompts, and table styling inspirations.</p>
+</div>
+<button class="px-space-md py-2 bg-primary text-on-primary rounded-lg text-body-sm font-medium flex items-center gap-space-sm" onclick="openCopilotPrompt('Generate 3 new concept variations for tablescape')">
+<span class="material-symbols-outlined text-[18px]">magic_button</span> Generate Concept
+      </button>
+</div>
+<!-- Moodboard Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<div class="w-full h-48 bg-cover bg-center" data-alt="Terracotta and warm champagne table runner with artisanal ceramic dinnerware and glowing amber candlelights in an upscale luxury gala room." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpsaAXxDO0NM7gLOY4Ef9na0IfVN2D0jiUkfyTO-Dv3OnZ0hn8QOWWdUc4WKuOQsPISM1iQ7BXdUyiCd5lojPEKU0avgK4otsEZNHSGUJLdqELgDQXQBlGv9THqfKURgCdhe2nDtVbYg2EwaiS5jiKrDcxPdU45OHG4XVN467PLoQw6Ilh1Eoxk1QykLVbIChuP_LkKjWUkzqeAOc9mD1zeBI2MJsO0SDyW1xT0JJA954b2Fi_EsQNzQ')"></div>
+<div class="p-space-md">
+<p class="font-medium text-body-md">Tablescape Alpha</p>
+<p class="text-body-sm text-on-surface-variant">Earthy ceramics, linen napkins, amber glassware.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<div class="w-full h-48 bg-cover bg-center" data-alt="Suspended botanical floral chandelier with warm spotlighting casting soft organic shadows across a minimalist wooden reception hall." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBI8fdoFFYfKSp1Eq0dzz9QZGEiBsgOzbDYg1sZVKnnq0KcNVMBRxE9dr5M2VZ7Z57FO6fhPv-1aMNAPNF-GnJNZJeTiyHUPqDKMAPA6NwxsWdyicRO_MJ2PbtBrq3XufwGhS7qnFroaGjybL7M2rXDRL6JYPVkU9GtG3qktcoM9qrcWckOnw4ety_G6D7gH46Zl8PwSYDw7BnePXe2NHH8tBRHkY2l_DWobIrRohj4zJ1rgZtySQ0mZA')"></div>
+<div class="p-space-md">
+<p class="font-medium text-body-md">Botanical Chandelier</p>
+<p class="text-body-sm text-on-surface-variant">Suspended dried eucalyptus and warm Edison pendants.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<div class="w-full h-48 bg-cover bg-center" data-alt="Grand entrance archway wrapped in terracotta drapery and warm brass accent lighting at a high-end European gala venue." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCleZ0nNQth11kdLmrVI-pGJfwkXsqFoARfvqm_2iIH_Cq9j-hY76rj3OFSjj6E1apfowTB3skTd2rqQhaIejongeN6ay3LSV_Bll1udjUaIPhbTf2-5jMhqZkz3Um_0b-7JIn4lE6PyLlIw-gTuL12LGuGXcHi0Fg8aIGnmELfG8KtWIDRS3sgW0CHwI6tywg1PWXGVp4r0eAXj_XfNcbsO8m55joLfmWkE2lb9KK60JV0-ZqkAEXfeA')"></div>
+<div class="p-space-md">
+<p class="font-medium text-body-md">Grand Entrance Arch</p>
+<p class="text-body-sm text-on-surface-variant">Textured linen drapery with custom brass monogram.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Script for interactivity -->
+<script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-surface', 'text-on-surface', 'shadow-xs');
+        btn.classList.add('text-on-surface-variant');
+        if(btn.getAttribute('data-target') === tabId) {
+          btn.classList.add('bg-surface', 'text-on-surface', 'shadow-xs');
+          btn.classList.remove('text-on-surface-variant');
+        }
+      });
+    }
+
+    function setTimelineMode(mode) {
+      if(mode === 'gantt') {
+        document.getElementById('timeline-gantt-view').classList.remove('hidden');
+        document.getElementById('timeline-ros-view').classList.add('hidden');
+        document.getElementById('mode-gantt').className = "px-space-md py-1 rounded-md text-body-sm font-medium bg-primary text-on-primary transition-all";
+        document.getElementById('mode-ros').className = "px-space-md py-1 rounded-md text-body-sm font-medium text-on-surface-variant transition-all";
+      } else {
+        document.getElementById('timeline-gantt-view').classList.add('hidden');
+        document.getElementById('timeline-ros-view').classList.remove('hidden');
+        document.getElementById('mode-ros').className = "px-space-md py-1 rounded-md text-body-sm font-medium bg-primary text-on-primary transition-all";
+        document.getElementById('mode-gantt').className = "px-space-md py-1 rounded-md text-body-sm font-medium text-on-surface-variant transition-all";
+      }
+    }
+
+    function updateBudgetSimulation(val) {
+      document.getElementById('guest-count-val').innerText = val + " Attendees";
+      let multiplier = val / 450;
+      document.getElementById('sim-catering').innerText = "$" + Math.round(135000 * multiplier).toLocaleString();
+      document.getElementById('sim-production').innerText = "$" + Math.round(112500 * multiplier).toLocaleString();
+    }
+
+    function openCopilotPrompt(promptText) {
+      const whispererDrawer = document.querySelector('aside.fixed.right-0');
+      if (whispererDrawer) {
+        const chatContainer = whispererDrawer.querySelector('.overflow-y-auto');
+        if (chatContainer) {
+          const userMsg = document.createElement('div');
+          userMsg.className = "p-space-md bg-primary-container text-on-primary-container rounded-lg shadow-sm mb-space-sm";
+          userMsg.innerHTML = `<p class="text-body-sm font-medium">User Prompt:</p><p class="text-body-sm">${promptText}</p>`;
+          chatContainer.appendChild(userMsg);
+
+          setTimeout(() => {
+            const aiMsg = document.createElement('div');
+            aiMsg.className = "p-space-md bg-surface rounded-lg shadow-sm mb-space-sm";
+            aiMsg.innerHTML = `<p class="text-body-sm font-medium text-primary">Event Whisperer AI:</p><p class="text-body-sm text-on-surface-variant">Executing action for "${promptText}". All parameters optimized successfully.</p>`;
+            chatContainer.appendChild(aiMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }, 600);
+          
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+      }
+    }
+  </script>
+</div></main></div><aside class="fixed right-0 top-0 h-full w-80 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg px-space-md shadow-[-1px_0_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-space-md"><span class="font-headline-sm text-on-surface">Event Whisperer</span><span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-sm">close</span></div><div class="flex-1 overflow-y-auto space-y-space-md"><div class="p-space-md bg-surface rounded-lg shadow-sm"><p class="text-body-sm text-on-surface-variant">AI Copilot active and ready for prompt inputs.</p></div></div></aside></body></html>
