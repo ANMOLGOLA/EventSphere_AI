@@ -1,0 +1,6 @@
+{
+  "name": "EventSphere AI",
+  "description": "Autonomous, multi-event GenAI planning assistant for Weddings, Birthdays, and Community Gatherings with smart budget simulations, conflict-aware timelines, vendor contract matrix, and persistent AI Copilot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
