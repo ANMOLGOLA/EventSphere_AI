@@ -334,6 +334,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#1B1C1A]">
+      {/* Skip to Main Content Link for WCAG 2.1 AA Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-[#9D3E1A] focus:px-4 focus:py-2.5 focus:text-white focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
       {/* 1. Left Navigation Bar */}
       <Sidebar
         events={events}
@@ -367,7 +374,7 @@ export default function App() {
         />
 
         {/* Central Workspace Canvas */}
-        <main className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+        <main id="main-content" className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto" tabIndex={-1}>
           {/* Hero Section */}
           <HeroSection
             activeEvent={activeEvent}

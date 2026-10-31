@@ -64,10 +64,11 @@ export const AddGuestModal: React.FC<AddGuestModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="guest-name" className="block font-semibold text-stone-700 mb-1">
               Guest or Household Name *
             </label>
             <input
+              id="guest-name"
               type="text"
               required
               placeholder="e.g. Dr. Alistair & Mei Finch"
@@ -79,10 +80,11 @@ export const AddGuestModal: React.FC<AddGuestModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="guest-email" className="block font-semibold text-stone-700 mb-1">
                 Contact Email
               </label>
               <input
+                id="guest-email"
                 type="email"
                 placeholder="finch@university.edu"
                 value={email}
@@ -92,10 +94,11 @@ export const AddGuestModal: React.FC<AddGuestModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="guest-partysize" className="block font-semibold text-stone-700 mb-1">
                 Party Size
               </label>
               <input
+                id="guest-partysize"
                 type="number"
                 min="1"
                 max="10"
@@ -108,10 +111,11 @@ export const AddGuestModal: React.FC<AddGuestModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="guest-dietary" className="block font-semibold text-stone-700 mb-1">
                 Dietary Preference
               </label>
               <select
+                id="guest-dietary"
                 value={dietary}
                 onChange={(e) => setDietary(e.target.value as GuestItem['dietary'])}
                 className="w-full rounded-xl border border-stone-200 px-3 py-2 text-stone-800 focus:border-[#9D3E1A] focus:outline-none"

@@ -75,10 +75,11 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="expense-name" className="block font-semibold text-stone-700 mb-1">
               Item or Service Name *
             </label>
             <input
+              id="expense-name"
               type="text"
               required
               placeholder="e.g. Acoustic Trio Cocktail Music"
@@ -89,10 +90,11 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
           </div>
 
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="expense-vendor" className="block font-semibold text-stone-700 mb-1">
               Vendor / Supplier
             </label>
             <input
+              id="expense-vendor"
               type="text"
               placeholder="e.g. Pacific Sunset Strings"
               value={vendor}
@@ -103,10 +105,11 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="expense-category" className="block font-semibold text-stone-700 mb-1">
                 Category
               </label>
               <select
+                id="expense-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as BudgetItem['category'])}
                 className="w-full rounded-xl border border-stone-200 px-3 py-2 text-stone-800 focus:border-[#9D3E1A] focus:outline-none"
