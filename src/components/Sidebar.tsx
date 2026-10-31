@@ -81,12 +81,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
     {
       id: 'timeline',
-      label: 'Timeline & Run-of-Show',
+      label: 'Timeline & Cues',
       icon: Clock,
       badge: hasTimelineConflict
         ? {
-            text: '1 Conflict',
-            color: 'text-amber-800 bg-amber-100 border border-amber-200',
+            text: 'Conflict Flagged',
+            color: 'text-amber-800 bg-amber-100 animate-pulse',
           }
         : null,
     },
@@ -127,6 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       />
 
       <aside
+        aria-label="Application navigation sidebar"
         className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col justify-between border-r border-[#E6D5C3]/70 bg-[#FBF9F5] transition-all duration-300 ease-in-out ${
           collapsed ? '-translate-x-full lg:translate-x-0 lg:w-20' : 'w-64 translate-x-0'
         }`}
@@ -152,7 +153,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             <button
               onClick={onToggleCollapse}
-              className="lg:hidden p-1.5 text-stone-500 hover:text-stone-800 rounded-lg"
+              aria-label="Close navigation sidebar"
+              className="lg:hidden p-1.5 text-stone-500 hover:text-stone-800 rounded-lg focus-visible:ring-2 focus-visible:ring-[#9D3E1A]"
               title="Close navigation"
             >
               <X className="h-5 w-5" />
@@ -178,76 +180,63 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <span
                         className="h-2 w-2 rounded-full border border-black/10 shrink-0"
-                        style={{ backgroundColor: activeEvent.theme.primaryColor }}
-                        aria-hidden="true"
+                        style={{ backgroundColor: activeEvent.theme?.primaryColor || '#9D3E1A' }}
                       />
-                      <span className="text-[10px] text-stone-500 truncate">{activeEvent.location}</span>
+                      <span className="text-[10px] text-stone-500">
+                        {activeEvent.date} · {activeEvent.location.split(',')[0]}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <ChevronDown
-                  className={`h-4 w-4 shrink-0 text-stone-400 group-hover:text-stone-600 transition-transform duration-200 ${
-                    dropdownOpen ? 'rotate-180 text-[#C57B57]' : ''
+                  className={`h-4 w-4 shrink-0 text-stone-400 transition-transform ${
+                    dropdownOpen ? 'rotate-180' : ''
                   }`}
-                  aria-hidden="true"
                 />
               </button>
 
               {dropdownOpen && (
-                <div
-                  role="listbox"
-                  aria-label="Events list"
-                  className="absolute left-0 right-0 top-full z-50 mt-1.5 rounded-xl border border-stone-200 bg-white p-1.5 shadow-lg animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <div className="mb-1 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-stone-500">
-                    Switch Active Event
+                <div className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-stone-200 bg-white p-2 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                    Your Active Events
                   </div>
-                  {events.map((ev) => (
-                    <button
-                      key={ev.id}
-                      role="option"
-                      aria-selected={ev.id === activeEvent.id}
-                      onClick={() => {
-                        onSelectEvent(ev.id);
-                        setDropdownOpen(false);
-                      }}
-                      className={`flex w-full items-center justify-between rounded-lg px-2.5 py-2 text-left text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C57B57] cursor-pointer ${
-                        ev.id === activeEvent.id
-                          ? 'bg-[#F4ECE1] font-semibold text-[#802A05]'
-                          : 'text-stone-700 hover:bg-stone-100/70'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 truncate">
-                        <span>{getEventEmoji(ev.type)}</span>
-                        <div className="truncate">
-                          <p className="truncate">{ev.title}</p>
-                          <div className="flex items-center gap-1 mt-0.5">
-                            <span
-                              className="h-1.5 w-1.5 rounded-full"
-                              style={{ backgroundColor: ev.theme.primaryColor }}
-                              aria-hidden="true"
-                            />
-                            <span className="text-[9px] text-stone-500 capitalize">{ev.type}</span>
-                          </div>
+                  <div className="mt-1 space-y-1">
+                    {events.map((ev) => (
+                      <button
+                        key={ev.id}
+                        onClick={() => {
+                          onSelectEvent(ev.id);
+                          setDropdownOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between rounded-xl p-2 text-left text-xs transition ${
+                          ev.id === activeEvent.id
+                            ? 'bg-[#F4ECE1] text-[#9D3E1A] font-semibold'
+                            : 'hover:bg-stone-50 text-stone-700'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 truncate">
+                          <span>{getEventEmoji(ev.type)}</span>
+                          <span className="truncate">{ev.title}</span>
                         </div>
-                      </div>
-                      {ev.id === activeEvent.id && (
-                        <span className="h-2 w-2 rounded-full bg-[#9D3E1A]" aria-hidden="true" />
-                      )}
+                        <span className="text-[10px] opacity-70">
+                          {ev.date.split(',')[0]}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="mt-2 border-t border-stone-100 pt-2">
+                    <button
+                      onClick={() => {
+                        setDropdownOpen(false);
+                        onOpenNewEvent();
+                      }}
+                      className="flex w-full items-center gap-2 rounded-xl border border-dashed border-stone-300 p-2 text-xs font-semibold text-stone-700 hover:border-[#9D3E1A] hover:bg-[#F4ECE1]/40 hover:text-[#9D3E1A] transition"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                      <span>Create New Event</span>
                     </button>
-                  ))}
-                  <div className="my-1 border-t border-stone-100" />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDropdownOpen(false);
-                      onOpenNewEvent();
-                    }}
-                    className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-semibold text-[#9D3E1A] hover:bg-[#F4ECE1]/50 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C57B57] cursor-pointer"
-                  >
-                    <Plus className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>+ New Event</span>
-                  </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -255,7 +244,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Navigation Items */}
-        <nav className="flex-1 space-y-1.5 overflow-y-auto px-3 py-4">
+        <nav aria-label="Sidebar Sections" className="flex-1 space-y-1.5 overflow-y-auto px-3 py-4">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -263,7 +252,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={item.id}
                 onClick={() => onSelectTab(item.id)}
-                className={`group flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-xs font-medium transition-all ${
+                aria-current={isActive ? 'page' : undefined}
+                className={`group flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-[#9D3E1A] ${
                   isActive
                     ? 'bg-[#9D3E1A] text-white shadow-xs font-semibold'
                     : 'text-stone-600 hover:bg-stone-200/50 hover:text-stone-900'
@@ -343,7 +333,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <button
             onClick={onOpenExport}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl border border-stone-200 bg-white py-2 text-xs font-semibold text-stone-700 shadow-2xs hover:border-[#9D3E1A]/40 hover:text-[#9D3E1A] transition ${
+            aria-label="Export Production Pack (PDF or CSV)"
+            className={`flex w-full items-center justify-center gap-2 rounded-xl border border-stone-200 bg-white py-2 text-xs font-semibold text-stone-700 shadow-2xs hover:border-[#9D3E1A]/40 hover:text-[#9D3E1A] transition focus-visible:ring-2 focus-visible:ring-[#9D3E1A] ${
               collapsed ? 'px-2' : 'px-3'
             }`}
             title="Export Plan (PDF / CSV)"

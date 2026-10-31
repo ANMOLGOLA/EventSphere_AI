@@ -86,28 +86,28 @@ app.use('/api/gemini/', geminiLimiter);
 // ============================================================================
 // 3. IN-MEMORY QUERY CACHE (EFFICIENCY & RESOURCE UTILIZATION)
 // ============================================================================
-interface CacheEntry {
-  data: any;
+interface CacheEntry<T = unknown> {
+  data: T;
   expiresAt: number;
 }
-const aiCache = new Map<string, CacheEntry>();
+const aiCache = new Map<string, CacheEntry<unknown>>();
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes TTL
 
-function getCacheKey(endpoint: string, payload: any): string {
+function getCacheKey(endpoint: string, payload: unknown): string {
   return `${endpoint}:${JSON.stringify(payload)}`;
 }
 
-function getFromCache(key: string): any | null {
+function getFromCache<T = unknown>(key: string): T | null {
   const entry = aiCache.get(key);
   if (!entry) return null;
   if (Date.now() > entry.expiresAt) {
     aiCache.delete(key);
     return null;
   }
-  return entry.data;
+  return entry.data as T;
 }
 
-function setToCache(key: string, data: any) {
+function setToCache<T = unknown>(key: string, data: T) {
   // Simple LRU-style pruning if cache exceeds 100 items
   if (aiCache.size > 100) {
     const oldestKey = aiCache.keys().next().value;
@@ -156,7 +156,7 @@ export const PromptRequestSchema = z.object({
     })
     .optional(),
   activeTab: z.string().optional(),
-  chatHistory: z.array(z.any()).optional(),
+  chatHistory: z.array(z.record(z.string(), z.unknown())).optional(),
 });
 
 export const VendorInquirySchema = z.object({
@@ -299,11 +299,12 @@ Provide responses formatted with clean headings, markdown bullet points, action 
       setToCache(cacheKey, fallbackText);
       return res.json({ text: fallbackText, cached: false });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
     console.error('Copilot API error:', error);
     return res.status(500).json({
       error: 'Failed to generate copilot response',
-      details: error?.message || 'Unknown error',
+      details: err.message || 'Unknown error',
     });
   }
 });
@@ -363,7 +364,7 @@ Include:
       setToCache(cacheKey, fallbackEmail);
       return res.json({ email: fallbackEmail, cached: false });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Vendor inquiry error:', error);
     return res.status(500).json({ error: 'Failed to generate inquiry' });
   }
@@ -418,7 +419,7 @@ Provide a concise, expert planning evaluation:
       setToCache(cacheKey, fallbackAnalysis);
       return res.json({ analysis: fallbackAnalysis, cached: false });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Vendor comparison error:', error);
     return res.status(500).json({ error: 'Failed to generate comparison' });
   }
@@ -485,7 +486,7 @@ Return a JSON array with objects containing:
       setToCache(cacheKey, concepts);
       return res.json({ concepts, cached: false });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Concept generation error:', error);
     return res.status(500).json({ error: 'Failed to generate concept' });
   }
@@ -504,7 +505,7 @@ app.post('/api/budget/validate', (req: Request, res: Response) => {
 });
 
 // Central Error Handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error & { status?: number }, req: Request, res: Response, next: NextFunction) => {
   console.error('Unhandled server error:', err);
   res.status(err.status || 500).json({
     error: err.message || 'Internal Server Error',
