@@ -80,7 +80,11 @@ export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="vendor-inquiry-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
       <div className="w-full max-w-lg rounded-2xl border border-stone-200 bg-white p-6 shadow-2xl">
         <div className="flex items-center justify-between pb-4 border-b border-stone-100">
           <div className="flex items-center gap-2">
@@ -88,7 +92,7 @@ export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
               <Sparkles className="h-4 w-4" />
             </div>
             <div>
-              <h3 className="font-editorial text-lg font-bold text-stone-900">
+              <h3 id="vendor-inquiry-modal-title" className="font-editorial text-lg font-bold text-stone-900">
                 AI Custom Vendor Inquiry
               </h3>
               <p className="text-[11px] text-stone-500">
@@ -98,7 +102,8 @@ export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
+            aria-label="Close dialog"
+            className="focus-visible:ring-2 focus-visible:ring-[#9D3E1A] p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
           >
             <X className="h-5 w-5" />
           </button>

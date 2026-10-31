@@ -111,7 +111,11 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
     }).format(val);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/40 backdrop-blur-xs overflow-y-auto">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="vendor-comparison-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/40 backdrop-blur-xs overflow-y-auto">
       <div className="w-full max-w-4xl rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-2xl my-auto max-h-[92vh] flex flex-col">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-stone-100 shrink-0">
@@ -120,7 +124,7 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
               <Layers className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-editorial text-xl font-bold text-stone-900">
+              <h3 id="vendor-comparison-modal-title" className="font-editorial text-xl font-bold text-stone-900">
                 Side-by-Side Vendor Comparison Tool
               </h3>
               <p className="text-xs text-stone-500">
@@ -130,7 +134,8 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
+            aria-label="Close dialog"
+            className="focus-visible:ring-2 focus-visible:ring-[#9D3E1A] p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
           >
             <X className="h-5 w-5" />
           </button>
@@ -451,7 +456,8 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
         <div className="pt-3 border-t border-stone-100 flex items-center justify-end gap-2 shrink-0">
           <button
             onClick={onClose}
-            className="rounded-xl border border-stone-200 bg-white px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition"
+            aria-label="Close dialog"
+            className="focus-visible:ring-2 focus-visible:ring-[#9D3E1A] rounded-xl border border-stone-200 bg-white px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition"
           >
             Close Matrix
           </button>
