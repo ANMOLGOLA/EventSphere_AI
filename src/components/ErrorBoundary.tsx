@@ -11,6 +11,11 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
+/**
+ * ErrorBoundary — React class component that catches synchronous render errors
+ * in the component subtree. Renders an inline recovery UI with the error message
+ * and a "Recover Session" button that reloads the page to restore workspace state.
+ */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   public override state: ErrorBoundaryState = {
     hasError: false,

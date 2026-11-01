@@ -23,7 +23,12 @@ interface MoodboardTabProps {
   onOpenCopilotWithPrompt: (prompt: string) => void;
 }
 
-export const MoodboardTab: React.FC<MoodboardTabProps> = ({
+/**
+ * MoodboardTab — Sensory Idea Lab moodboard panel displaying visual concept cards, colour palette swatches, cocktail recipes, and AI-generated styling proposal generation.
+ *
+ * @param props - {@link MoodboardTabProps}
+ */
+export const MoodboardTab = React.memo<MoodboardTabProps>(({
   activeEvent,
   moodboardItems,
   onToggleAddToPlan,
@@ -230,4 +235,4 @@ export const MoodboardTab: React.FC<MoodboardTabProps> = ({
       </div>
     </div>
   );
-};
+});

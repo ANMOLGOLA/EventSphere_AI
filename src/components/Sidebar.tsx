@@ -30,6 +30,13 @@ interface SidebarProps {
   onToggleCollapse: () => void;
 }
 
+/**
+ * Sidebar — Collapsible left navigation rail listing all event workspaces and
+ * the six primary tab navigation links. Supports collapsed (icon-only) and
+ * expanded (labelled) modes, and surfaces the new-event and export actions.
+ * Implements `aria-current="page"` on the active nav item for screen-reader
+ * landmark navigation.
+ */
 export const Sidebar: React.FC<SidebarProps> = ({
   events,
   activeEvent,

@@ -10,6 +10,11 @@ interface ExportModalProps {
   runOfShow: RunOfShowItem[];
 }
 
+/**
+ * ExportModal — Dialog for exporting the active event's run-of-show and budget
+ * ledger as a formatted PDF-ready print view, plain-text clipboard summary, or
+ * structured JSON package for partner sharing.
+ */
 export const ExportModal: React.FC<ExportModalProps> = ({
   isOpen,
   onClose,

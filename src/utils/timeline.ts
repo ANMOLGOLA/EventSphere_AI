@@ -1,5 +1,6 @@
 import { RunOfShowItem } from '@/types';
 
+/** Result shape returned by detectTimelineConflicts describing any scheduling overlap. */
 export interface TimelineConflictResult {
   hasConflict: boolean;
   conflictingItemIds: string[];

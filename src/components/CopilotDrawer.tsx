@@ -26,6 +26,12 @@ interface CopilotDrawerProps {
   onClearExternalPrompt?: () => void;
 }
 
+/**
+ * CopilotDrawer — Persistent right-side AI Event Whisperer chat panel (380 px).
+ * Manages local conversation history, sends prompts to the /api/gemini/copilot
+ * endpoint, renders rich markdown responses with action items and tables, and
+ * supports voice-input via the Web Speech API on supported browsers.
+ */
 export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({
   isOpen,
   onClose,

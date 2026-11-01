@@ -28,7 +28,12 @@ interface VendorsTabProps {
   onOpenCompareModal: (vendorA?: VendorItem, vendorB?: VendorItem) => void;
 }
 
-export const VendorsTab: React.FC<VendorsTabProps> = ({
+/**
+ * VendorsTab — Vendor relationship management panel: shortlisted partners, contract status, AI inquiry drafting, and AI-powered two-vendor comparison analysis.
+ *
+ * @param props - {@link VendorsTabProps}
+ */
+export const VendorsTab = React.memo<VendorsTabProps>(({
   activeEvent,
   vendors,
   onAddVendor,
@@ -391,4 +396,4 @@ export const VendorsTab: React.FC<VendorsTabProps> = ({
       </div>
     </div>
   );
-};
+});

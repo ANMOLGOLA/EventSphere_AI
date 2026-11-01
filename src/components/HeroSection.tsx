@@ -20,7 +20,14 @@ interface HeroSectionProps {
   deadlinesCount: number;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
+/**
+ * HeroSection — Full-bleed event hero card rendered at the top of every workspace.
+ * Displays the active event's hero photography, readiness score arc, upcoming
+ * deadline count, and primary CTA buttons for adding expenses and vendors.
+ *
+ * Wrapped in `React.memo` — re-renders only when the active event or counts change.
+ */
+export const HeroSection = React.memo<HeroSectionProps>(({
   activeEvent,
   onAddExpense,
   onAddVendor,
@@ -147,4 +154,4 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
     </div>
   );
-};
+});

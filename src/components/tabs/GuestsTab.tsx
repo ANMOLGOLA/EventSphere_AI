@@ -25,7 +25,12 @@ interface GuestsTabProps {
   onOpenCopilotWithPrompt: (prompt: string) => void;
 }
 
-export const GuestsTab: React.FC<GuestsTabProps> = ({
+/**
+ * GuestsTab — Guest management panel with RSVP tracking, dietary restriction aggregation, table assignment, filterable guest list, and seating map placeholder.
+ *
+ * @param props - {@link GuestsTabProps}
+ */
+export const GuestsTab = React.memo<GuestsTabProps>(({
   activeEvent,
   guests,
   onToggleStatus,
@@ -386,4 +391,4 @@ export const GuestsTab: React.FC<GuestsTabProps> = ({
       )}
     </div>
   );
-};
+});

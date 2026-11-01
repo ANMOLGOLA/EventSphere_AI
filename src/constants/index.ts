@@ -40,3 +40,4 @@ export const API_ROUTES = {
 /** Default avatar placeholder image used for newly created milestone assignees. */
 export const DEFAULT_AVATAR_URL =
   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80';
+

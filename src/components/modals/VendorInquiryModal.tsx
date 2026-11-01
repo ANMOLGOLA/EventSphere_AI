@@ -9,6 +9,11 @@ interface VendorInquiryModalProps {
   activeEvent: EventData;
 }
 
+/**
+ * VendorInquiryModal — Dialog that invokes the Gemini AI vendor-inquiry endpoint
+ * to generate a personalised, professional outreach email for the selected vendor.
+ * The generated email can be copied to clipboard or sent directly from the modal.
+ */
 export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
   isOpen,
   onClose,

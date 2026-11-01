@@ -33,7 +33,12 @@ interface TimelineTabProps {
   onAddRunOfShowItem: () => void;
 }
 
-export const TimelineTab: React.FC<TimelineTabProps> = ({
+/**
+ * TimelineTab — Multi-mode timeline panel showing the planning milestone roadmap, live day-of run-of-show cue blocks, conflict detection alerts, and ambient soundscape management.
+ *
+ * @param props - {@link TimelineTabProps}
+ */
+export const TimelineTab = React.memo<TimelineTabProps>(({
   activeEvent,
   milestones,
   runOfShow,
@@ -498,4 +503,4 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
       )}
     </div>
   );
-};
+});

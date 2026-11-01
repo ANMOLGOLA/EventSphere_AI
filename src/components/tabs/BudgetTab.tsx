@@ -28,7 +28,12 @@ interface BudgetTabProps {
   onToggleReceipt: (id: string) => void;
 }
 
-export const BudgetTab: React.FC<BudgetTabProps> = ({
+/**
+ * BudgetTab — Full-featured budget ledger view with live variance gauges, per-category breakdown, AI optimisation suggestions, receipt management, and per-guest spend simulation.
+ *
+ * @param props - {@link BudgetTabProps}
+ */
+export const BudgetTab = React.memo<BudgetTabProps>(({
   activeEvent,
   budgetItems,
   onAddExpense,
@@ -493,4 +498,4 @@ export const BudgetTab: React.FC<BudgetTabProps> = ({
       </div>
     </div>
   );
-};
+});

@@ -28,6 +28,11 @@ interface VendorComparisonModalProps {
   onDraftInquiry: (vendor: VendorItem) => void;
 }
 
+/**
+ * VendorComparisonModal — Dialog that calls the Gemini AI compare-vendors endpoint
+ * to produce a concise executive analysis comparing two shortlisted vendor partners
+ * across pricing, reputation, and strategic fit for the active event.
+ */
 export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
   isOpen,
   onClose,

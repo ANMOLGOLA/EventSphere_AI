@@ -25,6 +25,12 @@ interface HeaderProps {
   hasTimelineConflict: boolean;
 }
 
+/**
+ * Header — Sticky top navigation bar displaying the active event name, the six
+ * workspace tab buttons (with full WAI-ARIA tab pattern), AI Copilot toggle,
+ * conflict indicator badge, and export action. Collapses to an icon-only rail
+ * on mobile with a hamburger sidebar toggle.
+ */
 export const Header: React.FC<HeaderProps> = ({
   activeEvent,
   activeTab,

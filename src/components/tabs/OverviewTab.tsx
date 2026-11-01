@@ -19,7 +19,12 @@ interface OverviewTabProps {
   readinessScore: number;
 }
 
-export const OverviewTab: React.FC<OverviewTabProps> = ({
+/**
+ * OverviewTab — Renders the event command-centre overview: active concept card, readiness gauge, RSVP thermometer, upcoming deadline rail, and AI-suggested action prompts.
+ *
+ * @param props - {@link OverviewTabProps}
+ */
+export const OverviewTab = React.memo<OverviewTabProps>(({
   activeEvent,
   onSwitchTab,
   onOpenCopilotWithPrompt,
@@ -288,4 +293,4 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       </div>
     </div>
   );
-};
+});

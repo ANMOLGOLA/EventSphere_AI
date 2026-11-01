@@ -34,6 +34,18 @@ import {
 } from '@/data/initialData';
 import { EventData, BudgetItem, MilestoneItem, RunOfShowItem, VendorItem, MoodboardItem, GuestItem } from '@/types';
 
+/**
+ * App — Root application component for EventSphere AI.
+ *
+ * Manages global event workspace state (events, budgets, milestones,
+ * run-of-show, vendors, moodboard, guests) via per-event map patterns.
+ * Renders the three-panel layout: Sidebar | Main Canvas | Copilot Drawer,
+ * with lazy modal portals for all create/edit flows.
+ *
+ * All handler functions are stabilised with `useCallback` and all derived
+ * per-event slices are memoised with `useMemo` to minimise unnecessary
+ * re-renders of deeply nested tab components.
+ */
 export default function App() {
   const [events, setEvents] = useState<EventData[]>(INITIAL_EVENTS);
   const [activeEventId, setActiveEventId] = useState<string>('sarah-alex-wedding');
@@ -78,25 +90,54 @@ export default function App() {
   const [addMilestoneOpen, setAddMilestoneOpen] = useState(false);
   const [addGuestOpen, setAddGuestOpen] = useState(false);
 
-  // Current Active Event
-  const activeEvent = events.find((e) => e.id === activeEventId) || events[0];
+  // ── Derived per-event slices (memoised for referential stability) ──────
+  const activeEvent = useMemo(
+    () => events.find((e) => e.id === activeEventId) ?? events[0],
+    [events, activeEventId]
+  );
 
-  const currentBudgetItems = budgetMap[activeEvent.id] || [];
-  const currentMilestones = milestonesMap[activeEvent.id] || [];
-  const currentRunOfShow = runOfShowMap[activeEvent.id] || [];
-  const currentVendors = vendorsMap[activeEvent.id] || [];
-  const currentMoodboard = moodboardMap[activeEvent.id] || [];
-  const currentGuests = guestsMap[activeEvent.id] || [];
-  const currentHasConflict = hasConflictMap[activeEvent.id] ?? false;
-  const currentOptimization = optimizationMap[activeEvent.id] ?? false;
+  const currentBudgetItems = useMemo(
+    () => budgetMap[activeEvent.id] ?? [],
+    [budgetMap, activeEvent.id]
+  );
+  const currentMilestones = useMemo(
+    () => milestonesMap[activeEvent.id] ?? [],
+    [milestonesMap, activeEvent.id]
+  );
+  const currentRunOfShow = useMemo(
+    () => runOfShowMap[activeEvent.id] ?? [],
+    [runOfShowMap, activeEvent.id]
+  );
+  const currentVendors = useMemo(
+    () => vendorsMap[activeEvent.id] ?? [],
+    [vendorsMap, activeEvent.id]
+  );
+  const currentMoodboard = useMemo(
+    () => moodboardMap[activeEvent.id] ?? [],
+    [moodboardMap, activeEvent.id]
+  );
+  const currentGuests = useMemo(
+    () => guestsMap[activeEvent.id] ?? [],
+    [guestsMap, activeEvent.id]
+  );
+  const currentHasConflict = useMemo(
+    () => hasConflictMap[activeEvent.id] ?? false,
+    [hasConflictMap, activeEvent.id]
+  );
+  const currentOptimization = useMemo(
+    () => optimizationMap[activeEvent.id] ?? false,
+    [optimizationMap, activeEvent.id]
+  );
 
-  // Handlers
-  const handleOpenCopilotWithPrompt = (prompt: string) => {
+  // ── Event Handlers (stabilised with useCallback) ───────────────────────
+  /** Opens the AI Copilot drawer and seeds it with a pre-composed prompt. */
+  const handleOpenCopilotWithPrompt = useCallback((prompt: string) => {
     setExternalPrompt(prompt);
     setCopilotOpen(true);
-  };
+  }, []);
 
-  const handleResolveConflict = () => {
+  /** Resolves the detected schedule conflict by applying a 20-minute buffer to cue r3. */
+  const handleResolveConflict = useCallback(() => {
     setRunOfShowMap((prev) => ({
       ...prev,
       [activeEvent.id]: (prev[activeEvent.id] || []).map((item) => {
@@ -125,9 +166,10 @@ export default function App() {
           : ev
       )
     );
-  };
+  }, [activeEvent.id]);
 
-  const handleApplyBudgetOptimization = () => {
+  /** Applies AI budget optimisation: reduces florals cost, marks music as Paid. */
+  const handleApplyBudgetOptimization = useCallback(() => {
     setBudgetMap((prev) => ({
       ...prev,
       [activeEvent.id]: (prev[activeEvent.id] || []).map((item) => {
@@ -166,9 +208,10 @@ export default function App() {
           : ev
       )
     );
-  };
+  }, [activeEvent.id]);
 
-  const handleToggleMilestone = (id: string) => {
+  /** Toggles completed state of a milestone and recalculates readiness score. */
+  const handleToggleMilestone = useCallback((id: string) => {
     setMilestonesMap((prev) => {
       const updated = (prev[activeEvent.id] || []).map((m) =>
         m.id === id ? { ...m, completed: !m.completed } : m
@@ -184,73 +227,65 @@ export default function App() {
 
       return { ...prev, [activeEvent.id]: updated };
     });
-  };
+  }, [activeEvent.id]);
 
-  const handleToggleReceipt = (budgetId: string) => {
+  /** Toggles the receipt-attached flag on a budget line item. */
+  const handleToggleReceipt = useCallback((budgetId: string) => {
     setBudgetMap((prev) => ({
       ...prev,
-      [activeEvent.id]: (prev[activeEvent.id] || []).map((item) =>
+      [activeEvent.id]: (prev[activeEvent.id] ?? []).map((item) =>
         item.id === budgetId ? { ...item, receiptAttached: !item.receiptAttached } : item
       ),
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddExpense = (newItem: Omit<BudgetItem, 'id'>) => {
-    const itemWithId: BudgetItem = {
-      ...newItem,
-      id: `exp-${Date.now()}`,
-    };
+  /** Prepends a new expense to the active event's budget ledger. */
+  const handleAddExpense = useCallback((newItem: Omit<BudgetItem, 'id'>) => {
+    const itemWithId: BudgetItem = { ...newItem, id: `exp-${Date.now()}` };
     setBudgetMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [itemWithId, ...(prev[activeEvent.id] || [])],
+      [activeEvent.id]: [itemWithId, ...(prev[activeEvent.id] ?? [])],
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddVendor = (newVendor: Omit<VendorItem, 'id'>) => {
-    const vendorWithId: VendorItem = {
-      ...newVendor,
-      id: `v-${Date.now()}`,
-    };
+  /** Prepends a new vendor to the active event's vendor shortlist. */
+  const handleAddVendor = useCallback((newVendor: Omit<VendorItem, 'id'>) => {
+    const vendorWithId: VendorItem = { ...newVendor, id: `v-${Date.now()}` };
     setVendorsMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [vendorWithId, ...(prev[activeEvent.id] || [])],
+      [activeEvent.id]: [vendorWithId, ...(prev[activeEvent.id] ?? [])],
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddRunOfShowItem = (newBlock: Omit<RunOfShowItem, 'id'>) => {
-    const blockWithId: RunOfShowItem = {
-      ...newBlock,
-      id: `ros-${Date.now()}`,
-    };
+  /** Appends a new cue block to the active event's run-of-show. */
+  const handleAddRunOfShowItem = useCallback((newBlock: Omit<RunOfShowItem, 'id'>) => {
+    const blockWithId: RunOfShowItem = { ...newBlock, id: `ros-${Date.now()}` };
     setRunOfShowMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [...(prev[activeEvent.id] || []), blockWithId],
+      [activeEvent.id]: [...(prev[activeEvent.id] ?? []), blockWithId],
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddMilestone = (newMilestone: Omit<MilestoneItem, 'id'>) => {
-    const milestoneWithId: MilestoneItem = {
-      ...newMilestone,
-      id: `m-${Date.now()}`,
-    };
+  /** Appends a new milestone checkpoint to the production roadmap. */
+  const handleAddMilestone = useCallback((newMilestone: Omit<MilestoneItem, 'id'>) => {
+    const milestoneWithId: MilestoneItem = { ...newMilestone, id: `m-${Date.now()}` };
     setMilestonesMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [...(prev[activeEvent.id] || []), milestoneWithId],
+      [activeEvent.id]: [...(prev[activeEvent.id] ?? []), milestoneWithId],
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddGuest = (newGuest: Omit<GuestItem, 'id'>) => {
-    const guestWithId: GuestItem = {
-      ...newGuest,
-      id: `g-${Date.now()}`,
-    };
+  /** Prepends a new guest entry to the active event's guest list. */
+  const handleAddGuest = useCallback((newGuest: Omit<GuestItem, 'id'>) => {
+    const guestWithId: GuestItem = { ...newGuest, id: `g-${Date.now()}` };
     setGuestsMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [guestWithId, ...(prev[activeEvent.id] || [])],
+      [activeEvent.id]: [guestWithId, ...(prev[activeEvent.id] ?? [])],
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleCreateNewEvent = (newEvent: EventData) => {
+  /** Creates a brand-new event workspace with seeded budget, milestone, and run-of-show data. */
+  const handleCreateNewEvent = useCallback((newEvent: EventData) => {
     setEvents((prev) => [newEvent, ...prev]);
     setActiveEventId(newEvent.id);
     setActiveTab('overview');
@@ -302,36 +337,62 @@ export default function App() {
         },
       ],
     }));
-  };
+  }, []);
 
-  const handleToggleGuestStatus = (
+  /** Updates the RSVP status for a single guest. */
+  const handleToggleGuestStatus = useCallback((
     guestId: string,
     newStatus: 'Confirmed' | 'Awaiting' | 'Declined'
   ) => {
     setGuestsMap((prev) => ({
       ...prev,
-      [activeEvent.id]: (prev[activeEvent.id] || []).map((g) =>
+      [activeEvent.id]: (prev[activeEvent.id] ?? []).map((g) =>
         g.id === guestId ? { ...g, rsvpStatus: newStatus } : g
       ),
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleToggleAddToPlan = (moodboardId: string) => {
+  /** Toggles the "added to plan" flag on a moodboard concept card. */
+  const handleToggleAddToPlan = useCallback((moodboardId: string) => {
     setMoodboardMap((prev) => ({
       ...prev,
-      [activeEvent.id]: (prev[activeEvent.id] || []).map((mb) =>
+      [activeEvent.id]: (prev[activeEvent.id] ?? []).map((mb) =>
         mb.id === moodboardId ? { ...mb, addedToPlan: !mb.addedToPlan } : mb
       ),
     }));
-  };
+  }, [activeEvent.id]);
 
-  const handleAddConcepts = (newConcepts: MoodboardItem[]) => {
+  /** Prepends AI-generated moodboard concepts to the active Idea Lab. */
+  const handleAddConcepts = useCallback((newConcepts: MoodboardItem[]) => {
     setMoodboardMap((prev) => ({
       ...prev,
-      [activeEvent.id]: [...newConcepts, ...(prev[activeEvent.id] || [])],
+      [activeEvent.id]: [...newConcepts, ...(prev[activeEvent.id] ?? [])],
     }));
-  };
+  }, [activeEvent.id]);
 
+
+  // ── Stable modal & layout callbacks (eliminates inline JSX lambda churn) ──
+  const handleOpenNewEvent = useCallback(() => setNewEventOpen(true), []);
+  const handleOpenExport = useCallback(() => setExportModalOpen(true), []);
+  const handleToggleCopilot = useCallback(() => setCopilotOpen((o) => !o), []);
+  const handleToggleSidebar = useCallback(() => setSidebarCollapsed((c) => !c), []);
+  const handleOpenAddExpense = useCallback(() => setAddExpenseOpen(true), []);
+  const handleOpenAddVendor = useCallback(() => setAddVendorOpen(true), []);
+  const handleOpenAddMilestone = useCallback(() => setAddMilestoneOpen(true), []);
+  const handleOpenAddRunOfShow = useCallback(() => setAddRunOfShowOpen(true), []);
+  const handleOpenAddGuest = useCallback(() => setAddGuestOpen(true), []);
+  const handleOpenConceptModal = useCallback(() => setConceptModalOpen(true), []);
+  const handleOpenVendorInquiry = useCallback((vendor: VendorItem) => setVendorInquiryModal({ open: true, vendor }), []);
+  const handleCloseCopilot = useCallback(() => setCopilotOpen(false), []);
+  const handleCloseAddExpense = useCallback(() => setAddExpenseOpen(false), []);
+  const handleCloseAddVendor = useCallback(() => setAddVendorOpen(false), []);
+  const handleCloseNewEvent = useCallback(() => setNewEventOpen(false), []);
+  const handleCloseVendorInquiry = useCallback(() => setVendorInquiryModal({ open: false, vendor: null }), []);
+  const handleCloseConceptModal = useCallback(() => setConceptModalOpen(false), []);
+  const handleCloseExport = useCallback(() => setExportModalOpen(false), []);
+  const handleCloseAddRunOfShow = useCallback(() => setAddRunOfShowOpen(false), []);
+  const handleCloseAddMilestone = useCallback(() => setAddMilestoneOpen(false), []);
+  const handleCloseAddGuest = useCallback(() => setAddGuestOpen(false), []);
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#1B1C1A]">
       {/* Skip to Main Content Link for WCAG 2.1 AA Accessibility */}
@@ -345,11 +406,11 @@ export default function App() {
       <Sidebar
         events={events}
         activeEvent={activeEvent}
-        onSelectEvent={(id) => setActiveEventId(id)}
+        onSelectEvent={setActiveEventId}
         activeTab={activeTab}
-        onSelectTab={(tab) => setActiveTab(tab)}
-        onOpenNewEvent={() => setNewEventOpen(true)}
-        onOpenExport={() => setExportModalOpen(true)}
+        onSelectTab={setActiveTab}
+        onOpenNewEvent={handleOpenNewEvent}
+        onOpenExport={handleOpenExport}
         hasTimelineConflict={currentHasConflict}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -365,11 +426,11 @@ export default function App() {
         <Header
           activeEvent={activeEvent}
           activeTab={activeTab}
-          onSelectTab={(tab) => setActiveTab(tab)}
+          onSelectTab={setActiveTab}
           copilotOpen={copilotOpen}
-          onToggleCopilot={() => setCopilotOpen(!copilotOpen)}
-          onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
-          onOpenExport={() => setExportModalOpen(true)}
+          onToggleCopilot={handleToggleCopilot}
+          onToggleSidebar={handleToggleSidebar}
+          onOpenExport={handleOpenExport}
           hasTimelineConflict={currentHasConflict}
         />
 
@@ -378,8 +439,8 @@ export default function App() {
           {/* Hero Section */}
           <HeroSection
             activeEvent={activeEvent}
-            onAddExpense={() => setAddExpenseOpen(true)}
-            onAddVendor={() => setAddVendorOpen(true)}
+            onAddExpense={handleOpenAddExpense}
+            onAddVendor={handleOpenAddVendor}
             onAutoSchedule={handleResolveConflict}
             readinessScore={activeEvent.readinessScore}
             deadlinesCount={3}
@@ -390,7 +451,7 @@ export default function App() {
             {activeTab === 'overview' && (
               <OverviewTab
                 activeEvent={activeEvent}
-                onSwitchTab={(tab) => setActiveTab(tab)}
+                onSwitchTab={setActiveTab}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
                 readinessScore={activeEvent.readinessScore}
               />
@@ -400,7 +461,7 @@ export default function App() {
               <BudgetTab
                 activeEvent={activeEvent}
                 budgetItems={currentBudgetItems}
-                onAddExpense={() => setAddExpenseOpen(true)}
+                onAddExpense={handleOpenAddExpense}
                 onApplyOptimization={handleApplyBudgetOptimization}
                 optimizationApplied={currentOptimization}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
@@ -417,8 +478,8 @@ export default function App() {
                 onResolveConflict={handleResolveConflict}
                 hasConflict={currentHasConflict}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
-                onAddMilestone={() => setAddMilestoneOpen(true)}
-                onAddRunOfShowItem={() => setAddRunOfShowOpen(true)}
+                onAddMilestone={handleOpenAddMilestone}
+                onAddRunOfShowItem={handleOpenAddRunOfShow}
               />
             )}
 
@@ -426,10 +487,8 @@ export default function App() {
               <VendorsTab
                 activeEvent={activeEvent}
                 vendors={currentVendors}
-                onAddVendor={() => setAddVendorOpen(true)}
-                onDraftInquiry={(vendor) =>
-                  setVendorInquiryModal({ open: true, vendor })
-                }
+                onAddVendor={handleOpenAddVendor}
+                onDraftInquiry={handleOpenVendorInquiry}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
                 onOpenCompareModal={() => {}}
               />
@@ -440,7 +499,7 @@ export default function App() {
                 activeEvent={activeEvent}
                 moodboardItems={currentMoodboard}
                 onToggleAddToPlan={handleToggleAddToPlan}
-                onOpenGenerateConceptModal={() => setConceptModalOpen(true)}
+                onOpenGenerateConceptModal={handleOpenConceptModal}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
               />
             )}
@@ -450,7 +509,7 @@ export default function App() {
                 activeEvent={activeEvent}
                 guests={currentGuests}
                 onToggleStatus={handleToggleGuestStatus}
-                onAddGuest={() => setAddGuestOpen(true)}
+                onAddGuest={handleOpenAddGuest}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
               />
             )}
@@ -461,7 +520,7 @@ export default function App() {
       {/* 3. Persistent AI Copilot ("Event Whisperer" Right Drawer - 380px wide) */}
       <CopilotDrawer
         isOpen={copilotOpen}
-        onClose={() => setCopilotOpen(false)}
+        onClose={handleCloseCopilot}
         activeEvent={activeEvent}
         activeTab={activeTab}
         externalPrompt={externalPrompt}
@@ -471,39 +530,39 @@ export default function App() {
       {/* Modals */}
       <AddExpenseModal
         isOpen={addExpenseOpen}
-        onClose={() => setAddExpenseOpen(false)}
+        onClose={handleCloseAddExpense}
         onAdd={handleAddExpense}
       />
 
       <AddVendorModal
         isOpen={addVendorOpen}
-        onClose={() => setAddVendorOpen(false)}
+        onClose={handleCloseAddVendor}
         onAdd={handleAddVendor}
       />
 
       <NewEventModal
         isOpen={newEventOpen}
-        onClose={() => setNewEventOpen(false)}
+        onClose={handleCloseNewEvent}
         onCreateEvent={handleCreateNewEvent}
       />
 
       <VendorInquiryModal
         isOpen={vendorInquiryModal.open}
-        onClose={() => setVendorInquiryModal({ open: false, vendor: null })}
+        onClose={handleCloseVendorInquiry}
         vendor={vendorInquiryModal.vendor}
         activeEvent={activeEvent}
       />
 
       <GenerateConceptModal
         isOpen={conceptModalOpen}
-        onClose={() => setConceptModalOpen(false)}
+        onClose={handleCloseConceptModal}
         activeEvent={activeEvent}
         onAddConcepts={handleAddConcepts}
       />
 
       <ExportModal
         isOpen={exportModalOpen}
-        onClose={() => setExportModalOpen(false)}
+        onClose={handleCloseExport}
         activeEvent={activeEvent}
         budgetItems={currentBudgetItems}
         runOfShow={currentRunOfShow}
@@ -511,19 +570,19 @@ export default function App() {
 
       <AddRunOfShowModal
         isOpen={addRunOfShowOpen}
-        onClose={() => setAddRunOfShowOpen(false)}
+        onClose={handleCloseAddRunOfShow}
         onAdd={handleAddRunOfShowItem}
       />
 
       <AddMilestoneModal
         isOpen={addMilestoneOpen}
-        onClose={() => setAddMilestoneOpen(false)}
+        onClose={handleCloseAddMilestone}
         onAdd={handleAddMilestone}
       />
 
       <AddGuestModal
         isOpen={addGuestOpen}
-        onClose={() => setAddGuestOpen(false)}
+        onClose={handleCloseAddGuest}
         onAdd={handleAddGuest}
       />
     </div>
