@@ -1,5 +1,7 @@
+/** Union of supported event celebration types in EventSphere AI. */
 export type EventType = 'wedding' | 'birthday' | 'gala';
 
+/** Resolved CSS colour tokens derived from the active event's theme palette. */
 export interface ThemeColors {
   primary: string;
   primaryHover: string;
@@ -13,6 +15,7 @@ export interface ThemeColors {
   badgeText: string;
 }
 
+/** Core data model for a single event workspace, including budget, guest, and theme metadata. */
 export interface EventData {
   id: string;
   type: EventType;
@@ -38,6 +41,7 @@ export interface EventData {
   };
 }
 
+/** Represents a single line-item in the event budget ledger. */
 export interface BudgetItem {
   id: string;
   name: string;
@@ -49,6 +53,7 @@ export interface BudgetItem {
   receiptAttached?: boolean;
 }
 
+/** A time-anchored planning checkpoint in the event production roadmap. */
 export interface MilestoneItem {
   id: string;
   month: string;
@@ -60,6 +65,7 @@ export interface MilestoneItem {
   category: string;
 }
 
+/** A minute-level cue block in the live day-of event production schedule. */
 export interface RunOfShowItem {
   id: string;
   time: string;
@@ -73,6 +79,7 @@ export interface RunOfShowItem {
   conflictDetails?: string;
 }
 
+/** Represents a vendor partner shortlisted or contracted for the event. */
 export interface VendorItem {
   id: string;
   name: string;
@@ -89,6 +96,7 @@ export interface VendorItem {
   notes: string;
 }
 
+/** A visual or sensory concept card in the event moodboard Idea Lab. */
 export interface MoodboardItem {
   id: string;
   title: string;
@@ -105,6 +113,7 @@ export interface MoodboardItem {
   addedToPlan: boolean;
 }
 
+/** An individual guest or household entry in the event guest management list. */
 export interface GuestItem {
   id: string;
   name: string;
@@ -115,6 +124,7 @@ export interface GuestItem {
   tableNumber: string;
 }
 
+/** A single message in the AI Event Whisperer copilot conversation thread. */
 export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
@@ -124,6 +134,7 @@ export interface ChatMessage {
   tableData?: { headers: string[]; rows: string[][] };
 }
 
+/** An in-app notification displayed in the notification panel. */
 export interface NotificationItem {
   id: string;
   title: string;
@@ -132,6 +143,7 @@ export interface NotificationItem {
   read: boolean;
 }
 
+/** A queued audio cue in the live event sound management system. */
 export interface SoundCueItem {
   id: string;
   title: string;
@@ -149,6 +161,7 @@ export type TimelineTask = RunOfShowItem | MilestoneItem;
 export type CopilotMessage = ChatMessage;
 
 // Window & Speech API typing without 'any'
+/** Typed interface for the Web Speech API SpeechRecognition object, avoiding `any`. */
 export interface IWindowSpeechRecognition {
   start(): void;
   stop(): void;

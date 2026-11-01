@@ -8,6 +8,11 @@ interface AddVendorModalProps {
   onAdd: (vendor: Omit<VendorItem, 'id'>) => void;
 }
 
+/**
+ * AddVendorModal — Dialog for shortlisting a new vendor partner. Collects
+ * business name, service category, estimated fee, contact details, and
+ * production notes. Derives avatar initials from the vendor name on submit.
+ */
 export const AddVendorModal: React.FC<AddVendorModalProps> = ({
   isOpen,
   onClose,
@@ -87,10 +92,11 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="vendor-name" className="block font-semibold text-stone-700 mb-1">
               Business / Studio Name *
             </label>
             <input
+              id="vendor-name"
               type="text"
               required
               placeholder="e.g. Sierra Vista Acoustic Strings"
@@ -102,7 +108,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="vendor-category" className="block font-semibold text-stone-700 mb-1">
                 Category
               </label>
               <select
@@ -121,10 +127,11 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="vendor-cost" className="block font-semibold text-stone-700 mb-1">
                 Estimated Fee ($)
               </label>
               <input
+              id="vendor-cost"
                 type="number"
                 placeholder="3200"
                 value={cost}
@@ -136,7 +143,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="vendor-email" className="block font-semibold text-stone-700 mb-1">
                 Contact Email
               </label>
               <input
@@ -149,7 +156,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="vendor-phone" className="block font-semibold text-stone-700 mb-1">
                 Phone Number
               </label>
               <input
@@ -163,7 +170,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
           </div>
 
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="vendor-notes" className="block font-semibold text-stone-700 mb-1">
               Production Notes &amp; Scope
             </label>
             <textarea

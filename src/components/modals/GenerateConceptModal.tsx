@@ -9,6 +9,20 @@ interface GenerateConceptModalProps {
   onAddConcepts: (items: MoodboardItem[]) => void;
 }
 
+/** Shape of a concept object returned by the AI generate-concept endpoint. */
+interface GeneratedConcept {
+  title: string;
+  description: string;
+  accentColors: string[];
+  keyFeatures: string[];
+}
+
+/**
+ * GenerateConceptModal — Dialog that invokes the Gemini AI generate-concept
+ * endpoint to produce bespoke moodboard styling proposals based on a free-form
+ * aesthetic prompt. Generated concepts can be previewed and bulk-added to the
+ * active event's Idea Lab moodboard.
+ */
 export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
   isOpen,
   onClose,
@@ -17,7 +31,7 @@ export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
 }) => {
   const [themeInput, setThemeInput] = useState('Terracotta & Coastal Sunset Linen');
   const [loading, setLoading] = useState(false);
-  const [generatedResults, setGeneratedResults] = useState<any[] | null>(null);
+  const [generatedResults, setGeneratedResults] = useState<GeneratedConcept[] | null>(null);
 
   if (!isOpen) return null;
 
@@ -96,7 +110,7 @@ export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
 
         <div className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="concept-theme" className="block font-semibold text-stone-700 mb-1">
               Atmosphere &amp; Aesthetic Prompt
             </label>
             <input
@@ -146,7 +160,7 @@ export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
                       <h4 className="font-editorial font-bold text-stone-900">{item.title}</h4>
                       {item.accentColors && (
                         <div className="flex gap-1">
-                          {item.accentColors.map((c: string, ci: number) => (
+                          {item.accentColors.map((c, ci) => (
                             <span
                               key={ci}
                               className="h-3.5 w-3.5 rounded-full border border-black/10"

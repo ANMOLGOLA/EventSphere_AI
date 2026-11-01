@@ -8,6 +8,12 @@ interface NewEventModalProps {
   onCreateEvent: (newEvent: EventData) => void;
 }
 
+/**
+ * NewEventModal — Dialog for creating a brand-new event workspace. Collects
+ * title, event type, location, target date, guest count, and budget cap.
+ * Derives theme colors and hero image from the selected event type, then
+ * constructs a fully typed EventData object passed to onCreateEvent.
+ */
 export const NewEventModal: React.FC<NewEventModalProps> = ({
   isOpen,
   onClose,
@@ -103,10 +109,11 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="newevent-title" className="block font-semibold text-stone-700 mb-1">
               Event Title *
             </label>
             <input
+              id="newevent-title"
               type="text"
               required
               placeholder="e.g. Maya & Julian's Napa Valley Wedding"
@@ -143,7 +150,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
           </div>
 
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="newevent-location" className="block font-semibold text-stone-700 mb-1">
               Venue Location &amp; City
             </label>
             <input
@@ -157,7 +164,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="newevent-date" className="block font-semibold text-stone-700 mb-1">
                 Target Date
               </label>
               <input
@@ -170,7 +177,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="newevent-guests" className="block font-semibold text-stone-700 mb-1">
                 Target Guest Count
               </label>
               <input
@@ -184,10 +191,11 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
           </div>
 
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="newevent-budget" className="block font-semibold text-stone-700 mb-1">
               Total Budget Cap ($)
             </label>
             <input
+              id="newevent-budget"
               type="number"
               placeholder="45000"
               value={budget}

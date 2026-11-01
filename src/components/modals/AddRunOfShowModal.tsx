@@ -8,6 +8,11 @@ interface AddRunOfShowModalProps {
   onAdd: (item: Omit<RunOfShowItem, 'id'>) => void;
 }
 
+/**
+ * AddRunOfShowModal — Dialog for adding a new day-of cue block to the
+ * live run-of-show production schedule. Validates that title is non-empty
+ * before invoking onAdd with the constructed RunOfShowItem payload.
+ */
 export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
   isOpen,
   onClose,
@@ -66,10 +71,11 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="ros-title" className="block font-semibold text-stone-700 mb-1">
               Cue Title *
             </label>
             <input
+              id="ros-title"
               type="text"
               required
               placeholder="e.g. Sunset Champagne Toast & Cake Cutting"
@@ -81,7 +87,7 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="ros-time" className="block font-semibold text-stone-700 mb-1">
                 Start Time
               </label>
               <input
@@ -94,10 +100,11 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="ros-duration" className="block font-semibold text-stone-700 mb-1">
                 Duration (Minutes)
               </label>
               <input
+              id="ros-duration"
                 type="number"
                 placeholder="45"
                 value={durationMinutes}
@@ -109,7 +116,7 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="ros-location" className="block font-semibold text-stone-700 mb-1">
                 Venue Location / Zone
               </label>
               <input
@@ -122,7 +129,7 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="ros-lead" className="block font-semibold text-stone-700 mb-1">
                 Lead Person / Cue Owner
               </label>
               <input
@@ -136,7 +143,7 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
           </div>
 
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="ros-notes" className="block font-semibold text-stone-700 mb-1">
               Production Cues &amp; Technical Notes
             </label>
             <textarea

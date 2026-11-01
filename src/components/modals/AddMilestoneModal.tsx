@@ -8,6 +8,11 @@ interface AddMilestoneModalProps {
   onAdd: (milestone: Omit<MilestoneItem, 'id'>) => void;
 }
 
+/**
+ * AddMilestoneModal — Dialog for adding a new production milestone to the
+ * event planning roadmap. Controlled via isOpen prop; calls onAdd with the
+ * constructed MilestoneItem payload (minus auto-generated id) on submit.
+ */
 export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
   isOpen,
   onClose,
@@ -64,10 +69,11 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-stone-700 mb-1">
+            <label htmlFor="milestone-title" className="block font-semibold text-stone-700 mb-1">
               Milestone Objective *
             </label>
             <input
+              id="milestone-title"
               type="text"
               required
               placeholder="e.g. Finalize tasting menu and sommelier wine pairings"
@@ -79,7 +85,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="milestone-phase" className="block font-semibold text-stone-700 mb-1">
                 Roadmap Phase
               </label>
               <select
@@ -98,7 +104,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="milestone-duedate" className="block font-semibold text-stone-700 mb-1">
                 Target Due Date
               </label>
               <input
@@ -113,7 +119,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="milestone-assignee" className="block font-semibold text-stone-700 mb-1">
                 Assignee Lead
               </label>
               <input
@@ -126,7 +132,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="milestone-category" className="block font-semibold text-stone-700 mb-1">
                 Category
               </label>
               <select

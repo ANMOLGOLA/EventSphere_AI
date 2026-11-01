@@ -93,10 +93,18 @@ interface CacheEntry<T = unknown> {
 const aiCache = new Map<string, CacheEntry<unknown>>();
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes TTL
 
+/**
+ * Generates a deterministic cache key by serialising the endpoint name and
+ * request payload to a JSON string. Used as a Map key in the in-memory cache.
+ */
 function getCacheKey(endpoint: string, payload: unknown): string {
   return `${endpoint}:${JSON.stringify(payload)}`;
 }
 
+/**
+ * Retrieves a typed entry from the in-memory AI response cache.
+ * Returns null if the key is absent or the entry has expired (TTL exceeded).
+ */
 function getFromCache<T = unknown>(key: string): T | null {
   const entry = aiCache.get(key);
   if (!entry) return null;
@@ -107,6 +115,10 @@ function getFromCache<T = unknown>(key: string): T | null {
   return entry.data as T;
 }
 
+/**
+ * Stores a typed value in the in-memory AI response cache with a 5-minute TTL.
+ * Evicts the oldest entry when cache size exceeds 100 items (LRU-style pruning).
+ */
 function setToCache<T = unknown>(key: string, data: T) {
   // Simple LRU-style pruning if cache exceeds 100 items
   if (aiCache.size > 100) {
@@ -119,6 +131,10 @@ function setToCache<T = unknown>(key: string, data: T) {
 // ============================================================================
 // 4. SANITIZATION & GOOGLE GENAI CLIENT SETUP
 // ============================================================================
+/**
+ * Strips dangerous inline script tags and javascript: URI schemes from
+ * AI-generated text before it is returned to the client, mitigating XSS.
+ */
 function sanitizeOutput(text: string): string {
   if (!text) return '';
   return text
@@ -365,8 +381,9 @@ Include:
       return res.json({ email: fallbackEmail, cached: false });
     }
   } catch (error: unknown) {
-    console.error('Vendor inquiry error:', error);
-    return res.status(500).json({ error: 'Failed to generate inquiry' });
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error('Vendor inquiry error:', err.message);
+    return res.status(500).json({ error: 'Failed to generate inquiry', details: err.message });
   }
 });
 
@@ -420,8 +437,9 @@ Provide a concise, expert planning evaluation:
       return res.json({ analysis: fallbackAnalysis, cached: false });
     }
   } catch (error: unknown) {
-    console.error('Vendor comparison error:', error);
-    return res.status(500).json({ error: 'Failed to generate comparison' });
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error('Vendor comparison error:', err.message);
+    return res.status(500).json({ error: 'Failed to generate comparison', details: err.message });
   }
 });
 
@@ -487,8 +505,9 @@ Return a JSON array with objects containing:
       return res.json({ concepts, cached: false });
     }
   } catch (error: unknown) {
-    console.error('Concept generation error:', error);
-    return res.status(500).json({ error: 'Failed to generate concept' });
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error('Concept generation error:', err.message);
+    return res.status(500).json({ error: 'Failed to generate concept', details: err.message });
   }
 });
 
