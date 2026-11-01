@@ -80,6 +80,7 @@ export function validateTextInput(
   }
 
   // Strip potential script injections or control characters
+  // eslint-disable-next-line no-control-regex
   const clean = trimmed.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
 
   return {

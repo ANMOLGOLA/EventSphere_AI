@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
       const tabButtons = Array.from(
         container.querySelectorAll<HTMLButtonElement>('[role="tab"]')
       );
-      let nextIndex = currentIndex;
+      let nextIndex: number;
       if (e.key === 'ArrowRight') {
         e.preventDefault();
         nextIndex = (currentIndex + 1) % tabButtons.length;

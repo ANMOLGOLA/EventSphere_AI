@@ -60,7 +60,7 @@ export const INITIAL_EVENTS: EventData[] = [
   {
     id: 'global-gala-2025',
     type: 'gala',
-    title: 'Tech & Culture Gala 2025',
+    title: 'Community Tech & Culture Gala 2025',
     location: 'Grand Palais Éphémère, Paris',
     date: 'Nov 18, 2025',
     daysRemaining: 45,

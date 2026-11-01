@@ -1,5 +1,5 @@
 /** Union of supported event celebration types in EventSphere AI. */
-export type EventType = 'wedding' | 'birthday' | 'gala';
+export type EventType = 'wedding' | 'birthday' | 'community' | 'gala';
 
 /** Resolved CSS colour tokens derived from the active event's theme palette. */
 export interface ThemeColors {

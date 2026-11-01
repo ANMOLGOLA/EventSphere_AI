@@ -32,3 +32,4 @@ export function useModalA11y(isOpen: boolean, onClose: () => void): void {
     };
   }, [isOpen, onClose]);
 }
+

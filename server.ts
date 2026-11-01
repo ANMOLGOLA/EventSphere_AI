@@ -552,11 +552,17 @@ app.post('/api/budget/validate', (req: Request, res: Response) => {
   return res.json({ valid: true, item: parseResult.data });
 });
 
-// Central Error Handler
+// Central Error Handler with CWE-209 Information Exposure Hardening
 app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Unhandled server error:', err);
-  res.status(err.status || 500).json({
-    error: err.message || 'Internal Server Error',
+  const isProd = process.env.NODE_ENV === 'production';
+  const statusCode = typeof err.status === 'number' && err.status >= 400 && err.status < 600 ? err.status : 500;
+  const safeMessage = isProd && statusCode === 500
+    ? 'Internal Server Error'
+    : (err.message || 'Internal Server Error');
+
+  res.status(statusCode).json({
+    error: safeMessage,
   });
 });
 

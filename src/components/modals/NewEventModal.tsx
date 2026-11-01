@@ -60,7 +60,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
         accentColor: '#FFB703',
       };
       heroImage = 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1600&q=80';
-    } else if (type === 'gala') {
+    } else if (type === 'community' || type === 'gala') {
       theme = {
         primaryColor: '#0F766E',
         secondaryColor: '#F0FDFA',
@@ -136,7 +136,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
             <label className="block font-semibold text-stone-700 mb-1">
               Event Celebration Type
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 { id: 'wedding', label: '💍 Wedding' },
                 { id: 'birthday', label: '🎂 Birthday' },
