@@ -174,6 +174,11 @@ export const INITIAL_VENDORS: Record<string, VendorItem[]> = {
       avatarText: 'VB',
       avatarColor: 'bg-amber-100 text-amber-900 border-amber-300',
       notes: 'Exclusive bluff lawn access guaranteed from 07:00 AM to 12:00 AM midnight.',
+      checklist: [
+        { id: 'chk-v1-1', task: 'Site visit & sound decibel limit verification', completed: true },
+        { id: 'chk-v1-2', task: 'Liability insurance / COI submitted', completed: true },
+        { id: 'chk-v1-3', task: 'Final load-in floorplan & generator permit', completed: false },
+      ],
     },
     {
       id: 'v2',
@@ -189,6 +194,11 @@ export const INITIAL_VENDORS: Record<string, VendorItem[]> = {
       avatarText: 'CH',
       avatarColor: 'bg-orange-100 text-orange-900 border-orange-300',
       notes: 'Custom dietary requirements accommodated for 14 vegan and 8 gluten-free guests.',
+      checklist: [
+        { id: 'chk-v2-1', task: 'Tasting menu selection confirmed', completed: true },
+        { id: 'chk-v2-2', task: 'Final guest head-count & dietary split submitted', completed: true },
+        { id: 'chk-v2-3', task: 'Kitchen prep space walk-through with venue lead', completed: false },
+      ],
     },
     {
       id: 'v3',
@@ -204,6 +214,11 @@ export const INITIAL_VENDORS: Record<string, VendorItem[]> = {
       avatarText: 'WC',
       avatarColor: 'bg-stone-100 text-stone-900 border-stone-300',
       notes: 'Includes second shooter, drone aerial permits for Big Sur coast, and online gallery.',
+      checklist: [
+        { id: 'chk-v3-1', task: 'Shot list & family portrait groupings finalized', completed: true },
+        { id: 'chk-v3-2', task: 'Coastal drone permit and FAA waiver secured', completed: false },
+        { id: 'chk-v3-3', task: 'Sunset golden-hour lighting walk with couple', completed: false },
+      ],
     },
     {
       id: 'v4',
@@ -219,6 +234,11 @@ export const INITIAL_VENDORS: Record<string, VendorItem[]> = {
       avatarText: 'BS',
       avatarColor: 'bg-emerald-100 text-emerald-900 border-emerald-300',
       notes: 'Exploring AI optimization switch to in-season marigolds and eucalyptus to save $950.',
+      checklist: [
+        { id: 'chk-v4-1', task: 'Ceremony arch floral dimensions signed off', completed: true },
+        { id: 'chk-v4-2', task: 'In-season bloom swap approval (Cost saved: $950)', completed: true },
+        { id: 'chk-v4-3', task: 'Morning delivery & hydration vessel setup confirmed', completed: false },
+      ],
     },
     {
       id: 'v5',
@@ -234,6 +254,10 @@ export const INITIAL_VENDORS: Record<string, VendorItem[]> = {
       avatarText: 'PS',
       avatarColor: 'bg-purple-100 text-purple-900 border-purple-300',
       notes: 'Acoustic soloist for prelude, ceremony procession, and cocktail reception.',
+      checklist: [
+        { id: 'chk-v5-1', task: 'Processional & recessional sheet music provided', completed: true },
+        { id: 'chk-v5-2', task: 'PA sound check & acoustic mic test', completed: false },
+      ],
     },
     {
       id: 'v6',

@@ -79,6 +79,13 @@ export interface RunOfShowItem {
   conflictDetails?: string;
 }
 
+/** Represents an actionable checklist task item for a vendor's deliverables or compliance. */
+export interface VendorChecklistItem {
+  id: string;
+  task: string;
+  completed: boolean;
+}
+
 /** Represents a vendor partner shortlisted or contracted for the event. */
 export interface VendorItem {
   id: string;
@@ -94,6 +101,7 @@ export interface VendorItem {
   avatarText: string;
   avatarColor: string;
   notes: string;
+  checklist?: VendorChecklistItem[];
 }
 
 /** A visual or sensory concept card in the event moodboard Idea Lab. */

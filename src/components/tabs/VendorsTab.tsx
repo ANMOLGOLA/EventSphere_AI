@@ -26,6 +26,7 @@ interface VendorsTabProps {
   onDraftInquiry: (vendor: VendorItem) => void;
   onOpenCopilotWithPrompt: (prompt: string) => void;
   onOpenCompareModal: (vendorA?: VendorItem, vendorB?: VendorItem) => void;
+  onToggleChecklist?: (vendorId: string, checklistId: string) => void;
 }
 
 /**
@@ -40,6 +41,7 @@ export const VendorsTab = React.memo<VendorsTabProps>(({
   onDraftInquiry,
   onOpenCopilotWithPrompt,
   onOpenCompareModal,
+  onToggleChecklist,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -353,6 +355,38 @@ export const VendorsTab = React.memo<VendorsTabProps>(({
                     {vendor.paymentStatus}
                   </p>
                 </div>
+
+                
+                {/* Vendor Checklist & Deliverables */}
+                {vendor.checklist && vendor.checklist.length > 0 && (
+                  <div className="mb-3 rounded-xl border border-stone-100 bg-[#FBF9F5] p-2.5">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-stone-600 flex items-center gap-1">
+                        <CheckCircle2 className="h-3 w-3 text-[#9D3E1A]" />
+                        Vendor Checklist ({vendor.checklist.filter(c => c.completed).length}/{vendor.checklist.length})
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      {vendor.checklist.map((item) => (
+                        <div
+                          key={item.id}
+                          onClick={() => onToggleChecklist && onToggleChecklist(vendor.id, item.id)}
+                          className="flex items-center gap-2 cursor-pointer select-none text-[11px] text-stone-700 hover:text-stone-900"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={item.completed}
+                            onChange={() => onToggleChecklist && onToggleChecklist(vendor.id, item.id)}
+                            className="rounded border-stone-300 text-[#9D3E1A] focus:ring-[#9D3E1A] cursor-pointer"
+                          />
+                          <span className={item.completed ? 'line-through text-stone-400' : ''}>
+                            {item.task}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Notes */}
                 <p className="text-xs text-stone-600 leading-relaxed mb-4">

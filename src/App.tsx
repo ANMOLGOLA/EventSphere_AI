@@ -16,6 +16,7 @@ import { AddExpenseModal } from '@/components/modals/AddExpenseModal';
 import { AddVendorModal } from '@/components/modals/AddVendorModal';
 import { NewEventModal } from '@/components/modals/NewEventModal';
 import { VendorInquiryModal } from '@/components/modals/VendorInquiryModal';
+import { VendorComparisonModal } from '@/components/modals/VendorComparisonModal';
 import { GenerateConceptModal } from '@/components/modals/GenerateConceptModal';
 import { ExportModal } from '@/components/modals/ExportModal';
 import { AddRunOfShowModal } from '@/components/modals/AddRunOfShowModal';
@@ -80,6 +81,15 @@ export default function App() {
   const [addExpenseOpen, setAddExpenseOpen] = useState(false);
   const [addVendorOpen, setAddVendorOpen] = useState(false);
   const [newEventOpen, setNewEventOpen] = useState(false);
+  const [compareModalState, setCompareModalState] = useState<{
+    open: boolean;
+    vendorA: VendorItem | null;
+    vendorB: VendorItem | null;
+  }>({
+    open: false,
+    vendorA: null,
+    vendorB: null,
+  });
   const [vendorInquiryModal, setVendorInquiryModal] = useState<{ open: boolean; vendor: VendorItem | null }>({
     open: false,
     vendor: null,
@@ -382,6 +392,34 @@ export default function App() {
   const handleOpenAddRunOfShow = useCallback(() => setAddRunOfShowOpen(true), []);
   const handleOpenAddGuest = useCallback(() => setAddGuestOpen(true), []);
   const handleOpenConceptModal = useCallback(() => setConceptModalOpen(true), []);
+  const handleToggleVendorChecklist = useCallback((vendorId: string, checklistId: string) => {
+    setVendorsMap((prev) => ({
+      ...prev,
+      [activeEvent.id]: (prev[activeEvent.id] ?? []).map((v) => {
+        if (v.id !== vendorId || !v.checklist) return v;
+        return {
+          ...v,
+          checklist: v.checklist.map((c) =>
+            c.id === checklistId ? { ...c, completed: !c.completed } : c
+          ),
+        };
+      }),
+    }));
+  }, [activeEvent.id]);
+
+  const handleOpenCompare = useCallback((vendorA?: VendorItem, vendorB?: VendorItem) => {
+    const list = vendorsMap[activeEvent.id] ?? [];
+    setCompareModalState({
+      open: true,
+      vendorA: vendorA ?? list[0] ?? null,
+      vendorB: vendorB ?? list[1] ?? null,
+    });
+  }, [vendorsMap, activeEvent.id]);
+
+  const handleCloseCompare = useCallback(() => {
+    setCompareModalState((prev) => ({ ...prev, open: false }));
+  }, []);
+
   const handleOpenVendorInquiry = useCallback((vendor: VendorItem) => setVendorInquiryModal({ open: true, vendor }), []);
   const handleCloseCopilot = useCallback(() => setCopilotOpen(false), []);
   const handleCloseAddExpense = useCallback(() => setAddExpenseOpen(false), []);
@@ -490,7 +528,8 @@ export default function App() {
                 onAddVendor={handleOpenAddVendor}
                 onDraftInquiry={handleOpenVendorInquiry}
                 onOpenCopilotWithPrompt={handleOpenCopilotWithPrompt}
-                onOpenCompareModal={() => {}}
+                onOpenCompareModal={handleOpenCompare}
+                onToggleChecklist={handleToggleVendorChecklist}
               />
             )}
 
@@ -544,6 +583,16 @@ export default function App() {
         isOpen={newEventOpen}
         onClose={handleCloseNewEvent}
         onCreateEvent={handleCreateNewEvent}
+      />
+
+      <VendorComparisonModal
+        isOpen={compareModalState.open}
+        onClose={handleCloseCompare}
+        vendors={currentVendors}
+        initialVendorA={compareModalState.vendorA}
+        initialVendorB={compareModalState.vendorB}
+        activeEvent={activeEvent}
+        onDraftInquiry={handleOpenVendorInquiry}
       />
 
       <VendorInquiryModal
