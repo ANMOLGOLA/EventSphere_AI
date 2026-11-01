@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import {
-  
-  
   Sparkles,
   AlertTriangle,
   CheckCircle2,
-  
   Plus,
-  
-  
-  
   MapPin,
   User,
   Music2,
   Play,
   Pause,
-  
   Radio,
 } from 'lucide-react';
-import { MilestoneItem, RunOfShowItem, EventData, SoundCueItem } from '@/types';
+import {
+  MilestoneItem,
+  RunOfShowItem,
+  EventData,
+  SoundCueItem,
+} from '@/types';
 
 
 interface TimelineTabProps {

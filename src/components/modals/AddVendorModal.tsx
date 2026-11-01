@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
-import { VendorItem } from '@/types';
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
+import React, { useState } from 'react';
+import {
+  X,
+} from 'lucide-react';
+import {
+  VendorItem,
+} from '@/types';
 
 interface AddVendorModalProps {
   isOpen: boolean;
@@ -18,6 +25,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
   onClose,
   onAdd,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [name, setName] = useState('');
   const [category, setCategory] = useState<VendorItem['category']>('Photography');
   const [cost, setCost] = useState('');
@@ -25,14 +33,7 @@ export const AddVendorModal: React.FC<AddVendorModalProps> = ({
   const [contactPhone, setContactPhone] = useState('');
   const [notes, setNotes] = useState('');
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  
 
   if (!isOpen) return null;
 

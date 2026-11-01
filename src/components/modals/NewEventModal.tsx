@@ -1,6 +1,14 @@
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { EventData, EventType } from '@/types';
+import {
+  X,
+} from 'lucide-react';
+import {
+  EventData,
+  EventType,
+} from '@/types';
 
 interface NewEventModalProps {
   isOpen: boolean;
@@ -19,6 +27,7 @@ export const NewEventModal: React.FC<NewEventModalProps> = ({
   onClose,
   onCreateEvent,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [title, setTitle] = useState('');
   const [type, setType] = useState<EventType>('wedding');
   const [location, setLocation] = useState('');

@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import {
-  
-  
-  
-  
   Sparkles,
   Plus,
   Search,
   Utensils,
-  
-  
   Grid,
   List,
-  
-  
 } from 'lucide-react';
 import { GuestItem, EventData } from '@/types';
 

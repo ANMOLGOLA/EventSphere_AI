@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
-import { BudgetItem } from '@/types';
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
+import React, { useState } from 'react';
+import {
+  X,
+} from 'lucide-react';
+import {
+  BudgetItem,
+} from '@/types';
 
 interface AddExpenseModalProps {
   isOpen: boolean;
@@ -8,11 +15,16 @@ interface AddExpenseModalProps {
   onAdd: (item: Omit<BudgetItem, 'id'>) => void;
 }
 
+/**
+ * AddExpenseModal — Dialog for adding a line-item expense to the budget ledger.
+ * Validates item name, category, payment status, and dollar amounts before submit.
+ */
 export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   isOpen,
   onClose,
   onAdd,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [name, setName] = useState('');
   const [vendor, setVendor] = useState('');
   const [category, setCategory] = useState<BudgetItem['category']>('Catering');
@@ -20,14 +32,7 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   const [actual, setActual] = useState('');
   const [status, setStatus] = useState<BudgetItem['status']>('Pending');
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  
 
   if (!isOpen) return null;
 

@@ -1,3 +1,4 @@
+import { API_ROUTES } from '@/constants';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Sparkles,
@@ -10,9 +11,6 @@ import {
   Check,
   CheckSquare,
   Square,
-  
-  
-  
   RotateCcw,
 } from 'lucide-react';
 import { EventData, ChatMessage, IWindowSpeechRecognition } from '@/types';
@@ -124,7 +122,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/gemini/copilot', {
+      const response = await fetch(API_ROUTES.COPILOT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

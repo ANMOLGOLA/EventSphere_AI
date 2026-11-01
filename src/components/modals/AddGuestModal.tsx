@@ -1,6 +1,13 @@
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { GuestItem } from '@/types';
+import {
+  X,
+} from 'lucide-react';
+import {
+  GuestItem,
+} from '@/types';
 
 interface AddGuestModalProps {
   isOpen: boolean;
@@ -8,11 +15,16 @@ interface AddGuestModalProps {
   onAdd: (guest: Omit<GuestItem, 'id'>) => void;
 }
 
+/**
+ * AddGuestModal — Dialog for adding a new guest and party headcount to the RSVP ledger.
+ * Captures name, email, dietary preferences, and seating table allocation.
+ */
 export const AddGuestModal: React.FC<AddGuestModalProps> = ({
   isOpen,
   onClose,
   onAdd,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [partySize, setPartySize] = useState('2');

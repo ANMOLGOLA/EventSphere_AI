@@ -1,3 +1,7 @@
+import { API_ROUTES } from '@/constants';
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState, useEffect } from 'react';
 import {
   X,
@@ -6,17 +10,13 @@ import {
   DollarSign,
   Mail,
   Phone,
-  
-  
-  
-  
-  
-  
-  
   Layers,
   ChevronDown,
 } from 'lucide-react';
-import { VendorItem, EventData } from '@/types';
+import {
+  VendorItem,
+  EventData,
+} from '@/types';
 
 interface VendorComparisonModalProps {
   isOpen: boolean;
@@ -42,6 +42,7 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
   activeEvent,
   onDraftInquiry,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [vendorAId, setVendorAId] = useState<string>('');
   const [vendorBId, setVendorBId] = useState<string>('');
   const [aiAnalysis, setAiAnalysis] = useState<string>('');
@@ -77,7 +78,7 @@ export const VendorComparisonModal: React.FC<VendorComparisonModalProps> = ({
   const fetchComparisonAnalysis = async (vA: VendorItem, vB: VendorItem) => {
     setLoadingAi(true);
     try {
-      const res = await fetch('/api/gemini/compare-vendors', {
+      const res = await fetch(API_ROUTES.COMPARE_VENDORS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

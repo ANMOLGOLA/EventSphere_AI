@@ -10,10 +10,7 @@ import {
   ChevronDown,
   Plus,
   Download,
-  
-  
   X,
-  
 } from 'lucide-react';
 import { EventData } from '@/types';
 

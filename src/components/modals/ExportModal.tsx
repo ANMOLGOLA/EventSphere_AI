@@ -1,6 +1,20 @@
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X, FileSpreadsheet, FileText, Printer, Check, Download } from 'lucide-react';
-import { EventData, BudgetItem, RunOfShowItem } from '@/types';
+import {
+  X,
+  FileSpreadsheet,
+  FileText,
+  Printer,
+  Check,
+  Download,
+} from 'lucide-react';
+import {
+  EventData,
+  BudgetItem,
+  RunOfShowItem,
+} from '@/types';
 
 interface ExportModalProps {
   isOpen: boolean;
@@ -22,6 +36,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
   budgetItems,
   runOfShow,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
 
   if (!isOpen) return null;

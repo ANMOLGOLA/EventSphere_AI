@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import {
-  
   Sparkles,
-  
   Check,
-  
-  
   RefreshCw,
   Wine,
-  
   BookmarkCheck,
   BookmarkPlus,
-  
 } from 'lucide-react';
 import { MoodboardItem, EventData } from '@/types';
 

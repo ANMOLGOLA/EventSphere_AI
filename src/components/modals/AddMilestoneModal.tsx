@@ -1,6 +1,14 @@
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { MilestoneItem } from '@/types';
+import {
+  X,
+} from 'lucide-react';
+import {
+  MilestoneItem,
+} from '@/types';
+import { DEFAULT_AVATAR_URL } from '@/constants';
 
 interface AddMilestoneModalProps {
   isOpen: boolean;
@@ -18,6 +26,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
   onClose,
   onAdd,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [title, setTitle] = useState('');
   const [month, setMonth] = useState('2 Months Out');
   const [dueDate, setDueDate] = useState('Aug 30, 2025');
@@ -35,7 +44,7 @@ export const AddMilestoneModal: React.FC<AddMilestoneModalProps> = ({
       month,
       dueDate,
       assignee,
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+      avatar: DEFAULT_AVATAR_URL,
       completed: false,
       category,
     });

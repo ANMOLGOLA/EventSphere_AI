@@ -1,6 +1,13 @@
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { RunOfShowItem } from '@/types';
+import {
+  X,
+} from 'lucide-react';
+import {
+  RunOfShowItem,
+} from '@/types';
 
 interface AddRunOfShowModalProps {
   isOpen: boolean;
@@ -18,6 +25,7 @@ export const AddRunOfShowModal: React.FC<AddRunOfShowModalProps> = ({
   onClose,
   onAdd,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [time, setTime] = useState('07:30 PM');
   const [durationMinutes, setDurationMinutes] = useState('45');
   const [title, setTitle] = useState('');

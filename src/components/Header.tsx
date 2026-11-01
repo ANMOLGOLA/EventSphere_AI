@@ -5,12 +5,10 @@ import {
   Bell,
   PanelRightClose,
   PanelRightOpen,
-  
   Share2,
   CheckCircle2,
   AlertTriangle,
   Info,
-  
 } from 'lucide-react';
 import { EventData, NotificationItem } from '@/types';
 

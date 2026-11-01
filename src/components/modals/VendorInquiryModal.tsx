@@ -1,6 +1,21 @@
+import { API_ROUTES } from '@/constants';
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState, useEffect } from 'react';
-import { X, Sparkles, Copy, Check, Mail, RefreshCw, Send } from 'lucide-react';
-import { VendorItem, EventData } from '@/types';
+import {
+  X,
+  Sparkles,
+  Copy,
+  Check,
+  Mail,
+  RefreshCw,
+  Send,
+} from 'lucide-react';
+import {
+  VendorItem,
+  EventData,
+} from '@/types';
 
 interface VendorInquiryModalProps {
   isOpen: boolean;
@@ -20,6 +35,7 @@ export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
   vendor,
   activeEvent,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [inquiryText, setInquiryText] = useState('');
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -39,7 +55,7 @@ export const VendorInquiryModal: React.FC<VendorInquiryModalProps> = ({
     setCopied(false);
 
     try {
-      const res = await fetch('/api/gemini/vendor-inquiry', {
+      const res = await fetch(API_ROUTES.VENDOR_INQUIRY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

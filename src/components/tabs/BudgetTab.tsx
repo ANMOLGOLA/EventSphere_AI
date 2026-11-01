@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import {
-  
   Sparkles,
   CheckCircle2,
   FileText,
@@ -9,7 +8,6 @@ import {
   Search,
   Sliders,
   Check,
-  
 } from 'lucide-react';
 import { BudgetItem, EventData } from '@/types';
 import {

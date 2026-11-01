@@ -1,6 +1,18 @@
+import { API_ROUTES } from '@/constants';
+import {
+  useModalA11y,
+} from '@/hooks/useModalA11y';
 import React, { useState } from 'react';
-import { X, Sparkles, Wand2, Plus } from 'lucide-react';
-import { MoodboardItem, EventData } from '@/types';
+import {
+  X,
+  Sparkles,
+  Wand2,
+  Plus,
+} from 'lucide-react';
+import {
+  MoodboardItem,
+  EventData,
+} from '@/types';
 
 interface GenerateConceptModalProps {
   isOpen: boolean;
@@ -29,6 +41,7 @@ export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
   activeEvent,
   onAddConcepts,
 }) => {
+  useModalA11y(isOpen, onClose);
   const [themeInput, setThemeInput] = useState('Terracotta & Coastal Sunset Linen');
   const [loading, setLoading] = useState(false);
   const [generatedResults, setGeneratedResults] = useState<GeneratedConcept[] | null>(null);
@@ -38,7 +51,7 @@ export const GenerateConceptModal: React.FC<GenerateConceptModalProps> = ({
   const handleGenerate = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/gemini/generate-concept', {
+      const res = await fetch(API_ROUTES.GENERATE_CONCEPT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

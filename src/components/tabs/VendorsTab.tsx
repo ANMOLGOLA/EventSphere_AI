@@ -9,12 +9,9 @@ import {
   Sparkles,
   Plus,
   Search,
-  
-  
   FileCheck,
   Layers,
   ArrowRightLeft,
-  
   Check,
 } from 'lucide-react';
 import { VendorItem, EventData } from '@/types';

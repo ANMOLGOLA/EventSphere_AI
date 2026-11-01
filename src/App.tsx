@@ -33,7 +33,15 @@ import {
   INITIAL_MOODBOARD,
   INITIAL_GUESTS,
 } from '@/data/initialData';
-import { EventData, BudgetItem, MilestoneItem, RunOfShowItem, VendorItem, MoodboardItem, GuestItem } from '@/types';
+import {
+  EventData,
+  BudgetItem,
+  MilestoneItem,
+  RunOfShowItem,
+  VendorItem,
+  MoodboardItem,
+  GuestItem,
+} from '@/types';
 
 /**
  * App — Root application component for EventSphere AI.

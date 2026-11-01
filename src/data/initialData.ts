@@ -1,4 +1,12 @@
-import { EventData, BudgetItem, MilestoneItem, RunOfShowItem, VendorItem, MoodboardItem, GuestItem } from '@/types';
+import {
+  EventData,
+  BudgetItem,
+  MilestoneItem,
+  RunOfShowItem,
+  VendorItem,
+  MoodboardItem,
+  GuestItem,
+} from '@/types';
 
 export const INITIAL_EVENTS: EventData[] = [
   {

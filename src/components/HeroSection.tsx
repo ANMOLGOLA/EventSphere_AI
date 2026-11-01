@@ -6,8 +6,6 @@ import {
   Plus,
   Sparkles,
   CheckCircle2,
-  
-  
 } from 'lucide-react';
 import { EventData } from '@/types';
 

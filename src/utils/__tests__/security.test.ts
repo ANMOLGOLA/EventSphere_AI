@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { sanitizeText, validateMonetaryInput, validateTextInput, SECURE_LINK_PROPS } from '@/utils/security';
+import {
+  sanitizeText,
+  validateMonetaryInput,
+  validateTextInput,
+  SECURE_LINK_PROPS,
+} from '@/utils/security';
 
 describe('Security Utility Suite', () => {
   describe('sanitizeText', () => {
