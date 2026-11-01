@@ -9,12 +9,12 @@ import {
   Sparkles,
   Plus,
   Search,
-  ExternalLink,
-  ShieldCheck,
+  
+  
   FileCheck,
   Layers,
   ArrowRightLeft,
-  X,
+  
   Check,
 } from 'lucide-react';
 import { VendorItem, EventData } from '@/types';
@@ -39,7 +39,7 @@ export const VendorsTab = React.memo<VendorsTabProps>(({
   vendors,
   onAddVendor,
   onDraftInquiry,
-  onOpenCopilotWithPrompt,
+  
   onOpenCompareModal,
   onToggleChecklist,
 }) => {

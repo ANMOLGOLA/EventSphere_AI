@@ -6,13 +6,13 @@ import {
   DollarSign,
   Mail,
   Phone,
-  CheckCircle2,
-  Clock,
-  ArrowRight,
-  TrendingDown,
-  TrendingUp,
-  FileText,
-  Shield,
+  
+  
+  
+  
+  
+  
+  
   Layers,
   ChevronDown,
 } from 'lucide-react';

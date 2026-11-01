@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Users2, Mail, Phone, DollarSign } from 'lucide-react';
+import { X } from 'lucide-react';
 import { VendorItem } from '@/types';
 
 interface AddVendorModalProps {

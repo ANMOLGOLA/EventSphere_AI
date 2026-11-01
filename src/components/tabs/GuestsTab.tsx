@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import {
-  Users,
-  CheckCircle2,
-  Clock,
-  XCircle,
+  
+  
+  
+  
   Sparkles,
   Plus,
   Search,
   Utensils,
-  Mail,
-  UserCheck,
+  
+  
   Grid,
   List,
-  MapPin,
-  Check,
+  
+  
 } from 'lucide-react';
 import { GuestItem, EventData } from '@/types';
 
@@ -41,9 +41,9 @@ export const GuestsTab = React.memo<GuestsTabProps>(({
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'All' | 'Confirmed' | 'Awaiting' | 'Declined'>('All');
 
-  const confirmedCount = guests.filter((g) => g.rsvpStatus === 'Confirmed').length;
-  const awaitingCount = guests.filter((g) => g.rsvpStatus === 'Awaiting').length;
-  const declinedCount = guests.filter((g) => g.rsvpStatus === 'Declined').length;
+// unused:   const confirmedCount = guests.filter((g) => g.rsvpStatus === 'Confirmed').length;
+// unused:   const awaitingCount = guests.filter((g) => g.rsvpStatus === 'Awaiting').length;
+// unused:   const declinedCount = guests.filter((g) => g.rsvpStatus === 'Declined').length;
 
   const dietaryCounts = guests.reduce((acc, g) => {
     if (g.dietary !== 'None') {

@@ -5,12 +5,12 @@ import {
   Bell,
   PanelRightClose,
   PanelRightOpen,
-  Calendar,
+  
   Share2,
   CheckCircle2,
   AlertTriangle,
   Info,
-  X,
+  
 } from 'lucide-react';
 import { EventData, NotificationItem } from '@/types';
 
@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleCopilot,
   onToggleSidebar,
   onOpenExport,
-  hasTimelineConflict,
+  
 }) => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([

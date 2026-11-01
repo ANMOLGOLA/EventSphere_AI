@@ -10,9 +10,9 @@ import {
   Check,
   CheckSquare,
   Square,
-  CornerDownLeft,
-  Bot,
-  User,
+  
+  
+  
   RotateCcw,
 } from 'lucide-react';
 import { EventData, ChatMessage, IWindowSpeechRecognition } from '@/types';

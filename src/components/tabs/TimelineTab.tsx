@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import {
-  Calendar,
-  Clock,
+  
+  
   Sparkles,
   AlertTriangle,
   CheckCircle2,
-  Circle,
+  
   Plus,
-  ArrowRight,
-  ShieldAlert,
-  ChevronRight,
+  
+  
+  
   MapPin,
   User,
   Music2,
   Play,
   Pause,
-  Volume2,
+  
   Radio,
 } from 'lucide-react';
 import { MilestoneItem, RunOfShowItem, EventData, SoundCueItem } from '@/types';
-import { detectTimelineConflicts } from '@/utils/timeline';
+
 
 interface TimelineTabProps {
   activeEvent: EventData;
@@ -39,7 +39,7 @@ interface TimelineTabProps {
  * @param props - {@link TimelineTabProps}
  */
 export const TimelineTab = React.memo<TimelineTabProps>(({
-  activeEvent,
+  
   milestones,
   runOfShow,
   onToggleMilestone,

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
+
 import { TimelineTab } from '@/components/tabs/TimelineTab';
 import { INITIAL_EVENTS, INITIAL_MILESTONES, INITIAL_RUN_OF_SHOW } from '@/data/initialData';
 

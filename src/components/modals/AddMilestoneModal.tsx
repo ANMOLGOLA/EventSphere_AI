@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, User, Tag } from 'lucide-react';
+import { X } from 'lucide-react';
 import { MilestoneItem } from '@/types';
 
 interface AddMilestoneModalProps {

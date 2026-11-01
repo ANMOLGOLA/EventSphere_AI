@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
+
 import { AddExpenseModal } from '@/components/modals/AddExpenseModal';
 import { AddMilestoneModal } from '@/components/modals/AddMilestoneModal';
 import { AddGuestModal } from '@/components/modals/AddGuestModal';

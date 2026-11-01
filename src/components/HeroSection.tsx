@@ -6,8 +6,8 @@ import {
   Plus,
   Sparkles,
   CheckCircle2,
-  TrendingUp,
-  AlertTriangle,
+  
+  
 } from 'lucide-react';
 import { EventData } from '@/types';
 

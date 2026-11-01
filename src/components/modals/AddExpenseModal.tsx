@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, DollarSign, Tag, Building, CheckCircle2 } from 'lucide-react';
+import { X } from 'lucide-react';
 import { BudgetItem } from '@/types';
 
 interface AddExpenseModalProps {

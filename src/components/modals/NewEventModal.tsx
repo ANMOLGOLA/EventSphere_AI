@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, MapPin, Users, DollarSign, Sparkles } from 'lucide-react';
+import { X } from 'lucide-react';
 import { EventData, EventType } from '@/types';
 
 interface NewEventModalProps {

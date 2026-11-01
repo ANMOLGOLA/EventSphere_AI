@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Clock, MapPin, User, FileText } from 'lucide-react';
+import { X } from 'lucide-react';
 import { RunOfShowItem } from '@/types';
 
 interface AddRunOfShowModalProps {

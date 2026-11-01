@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, UserPlus, Utensils, Mail, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import { GuestItem } from '@/types';
 
 interface AddGuestModalProps {

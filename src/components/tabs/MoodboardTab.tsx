@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import {
-  Palette,
+  
   Sparkles,
-  Copy,
+  
   Check,
-  Plus,
-  Share2,
+  
+  
   RefreshCw,
   Wine,
-  Flame,
+  
   BookmarkCheck,
   BookmarkPlus,
-  Layers,
+  
 } from 'lucide-react';
 import { MoodboardItem, EventData } from '@/types';
 
@@ -29,7 +29,7 @@ interface MoodboardTabProps {
  * @param props - {@link MoodboardTabProps}
  */
 export const MoodboardTab = React.memo<MoodboardTabProps>(({
-  activeEvent,
+  
   moodboardItems,
   onToggleAddToPlan,
   onOpenGenerateConceptModal,

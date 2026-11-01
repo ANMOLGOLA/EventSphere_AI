@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Wand2, Plus, Check } from 'lucide-react';
+import { X, Sparkles, Wand2, Plus } from 'lucide-react';
 import { MoodboardItem, EventData } from '@/types';
 
 interface GenerateConceptModalProps {

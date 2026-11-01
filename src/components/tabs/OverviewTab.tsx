@@ -7,7 +7,7 @@ import {
   ShieldAlert,
   Users,
   CheckCircle2,
-  AlertCircle,
+  
   ExternalLink,
 } from 'lucide-react';
 import { EventData } from '@/types';

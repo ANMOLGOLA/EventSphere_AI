@@ -524,7 +524,7 @@ app.post('/api/budget/validate', (req: Request, res: Response) => {
 });
 
 // Central Error Handler
-app.use((err: Error & { status?: number }, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Unhandled server error:', err);
   res.status(err.status || 500).json({
     error: err.message || 'Internal Server Error',
@@ -535,7 +535,7 @@ app.use((err: Error & { status?: number }, req: Request, res: Response, next: Ne
 async function startServer() {
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'dist')));
-    app.get('*', (req: Request, res: Response) => {
+    app.get('*', (_req: Request, res: Response) => {
       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     });
   } else {
