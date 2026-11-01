@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   Menu,
   Sparkles,
@@ -75,11 +75,45 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'guests', label: 'Guest List' },
   ];
 
+  const tabsContainerRef = useRef<HTMLElement>(null);
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const markAllRead = () => {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   };
+
+  /**
+   * WCAG 2.1 SC 2.1.1 — Keyboard Navigation for Tab Pattern
+   * ArrowRight/ArrowLeft moves focus between tabs; Home/End jump to first/last.
+   */
+  const handleTabKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+      const container = tabsContainerRef.current;
+      if (!container) return;
+      const tabButtons = Array.from(
+        container.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+      );
+      let nextIndex = currentIndex;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextIndex = (currentIndex + 1) % tabButtons.length;
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        nextIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length;
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        nextIndex = tabButtons.length - 1;
+      } else {
+        return;
+      }
+      tabButtons[nextIndex].focus();
+      onSelectTab(tabs[nextIndex].id);
+    },
+    [onSelectTab, tabs]
+  );
 
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#E6D5C3]/70 bg-[#FDFBF7]/90 px-4 sm:px-6 backdrop-blur-md">
@@ -105,8 +139,8 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Center: Interactive Tab Switcher */}
-      <nav aria-label="Event workspace sections" className="hidden md:flex items-center gap-1 rounded-xl border border-[#E6D5C3] bg-[#F5F3EF] p-1 shadow-2xs" role="tablist">
-        {tabs.map((tab) => {
+      <nav ref={tabsContainerRef} aria-label="Event workspace sections" className="hidden md:flex items-center gap-1 rounded-xl border border-[#E6D5C3] bg-[#F5F3EF] p-1 shadow-2xs" role="tablist">
+        {tabs.map((tab, index) => {
           const isActive = activeTab === tab.id;
           return (
             <button
@@ -115,7 +149,9 @@ export const Header: React.FC<HeaderProps> = ({
               aria-selected={isActive}
               aria-controls={`panel-${tab.id}`}
               id={`tab-${tab.id}`}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => onSelectTab(tab.id)}
+              onKeyDown={(e) => handleTabKeyDown(e, index)}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-[#9D3E1A] ${
                 isActive
                   ? 'bg-white text-stone-900 font-semibold shadow-xs'

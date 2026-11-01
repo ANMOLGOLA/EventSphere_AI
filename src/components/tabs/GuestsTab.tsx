@@ -194,7 +194,7 @@ export const GuestsTab = React.memo<GuestsTabProps>(({
                 <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-stone-400" />
                 <input
                   type="text"
-                  placeholder="Search guest or table..."
+                  placeholder="Search guest or table..." aria-label="Search guests and tables"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="rounded-xl border border-stone-200 bg-stone-50/70 pl-8 pr-3 py-1.5 text-xs text-stone-800 focus:border-[#9D3E1A] focus:outline-none"
@@ -204,6 +204,7 @@ export const GuestsTab = React.memo<GuestsTabProps>(({
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as GuestItem['rsvpStatus'] | 'All')}
+                aria-label="Filter guests by RSVP status"
                 className="rounded-xl border border-stone-200 bg-stone-50/70 px-3 py-1.5 text-xs text-stone-700 focus:border-[#9D3E1A] focus:outline-none"
               >
                 <option value="All">All RSVP Statuses</option>

@@ -176,7 +176,7 @@ export const VendorsTab = React.memo<VendorsTabProps>(({
             <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-stone-400" />
             <input
               type="text"
-              placeholder="Search vendors..."
+              placeholder="Search vendors..." aria-label="Search vendors"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="rounded-xl border border-stone-200 bg-stone-50/70 pl-8 pr-3 py-1.5 text-xs text-stone-800 focus:border-[#9D3E1A] focus:outline-none"

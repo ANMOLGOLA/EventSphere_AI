@@ -126,10 +126,11 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="expense-status" className="block font-semibold text-stone-700 mb-1">
                 Payment Status
               </label>
               <select
+                id="expense-status"
                 value={status}
                 onChange={(e) => setStatus(e.target.value as BudgetItem['status'])}
                 className="w-full rounded-xl border border-stone-200 px-3 py-2 text-stone-800 focus:border-[#9D3E1A] focus:outline-none"
@@ -143,11 +144,12 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="expense-budgeted" className="block font-semibold text-stone-700 mb-1">
                 Budgeted Amount ($)
               </label>
               <input
                 type="number"
+                id="expense-budgeted"
                 placeholder="2500"
                 value={budgeted}
                 onChange={(e) => setBudgeted(e.target.value)}
@@ -156,11 +158,12 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
             </div>
 
             <div>
-              <label className="block font-semibold text-stone-700 mb-1">
+              <label htmlFor="expense-actual" className="block font-semibold text-stone-700 mb-1">
                 Actual Cost ($)
               </label>
               <input
                 type="number"
+                id="expense-actual"
                 placeholder="2100"
                 value={actual}
                 onChange={(e) => setActual(e.target.value)}

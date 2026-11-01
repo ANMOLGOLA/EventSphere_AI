@@ -473,7 +473,7 @@ export default function App() {
         />
 
         {/* Central Workspace Canvas */}
-        <main id="main-content" className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto" tabIndex={-1}>
+        <main id="main-content" role="tabpanel" aria-labelledby={`tab-${activeTab}`} className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto" tabIndex={-1}>
           {/* Hero Section */}
           <HeroSection
             activeEvent={activeEvent}
